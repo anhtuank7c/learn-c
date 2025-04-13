@@ -1,6 +1,6 @@
 # Revised Accelerated C Programming for Experienced Programmers (2 Weeks)
 
-I had been learned C in university but honestly, that was useless and I am not good at programming at that time, I also don't have any idea what a real-life C program is.
+I had been learned C in university but honestly, that was useless and I am not good at programming at that time, I also have no idea what a real-life C program is.
 
 I make this repo is to learn C seriously again, and my clear purpose is to dig into [PrimJS](https://github.com/lynx-family/primjs) to understand how it works.
 
