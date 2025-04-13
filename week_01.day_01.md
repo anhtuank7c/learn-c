@@ -6,7 +6,7 @@ C is general-purpose, procedural programming language developed in the early 197
 
 It's known for its efficiency, control and flexibility.
 
-Despite being nearly 50 years old, C remains one of the most infuential and widely used programming language in the world.
+Despite being nearly 50 years old, C remains one of the most influential and widely used programming language in the world.
 
 **Key characteristics of C:**
 
