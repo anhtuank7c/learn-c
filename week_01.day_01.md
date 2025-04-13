@@ -210,7 +210,7 @@ Understanding C memory model is essential for effective programming.
 
 **6.1 Memory layout**
 
-1. **Text segment** (`.text`): This segment contains the machine code, also known as the program's instructions or executable code. It's where the compiler translates your C code into the binary instructions that the CPU can understand.
+1. **Text segment** (`.text`): This segment contains the machine code, also known as the program's instructions or executable code. It's where the compiler translates your C code into the binary instructions that the CPU can understand. This segment is read-only to prevent accidental modification of instructions.
 2. **Data segment**:
    * Initialized data (`.data`): This segment holds global and static variables that have been explicitly initialized with a value during their declaration.
    * Uninitialized Data (`.bss`): This segment stores global and static variables that have not been explicitly initialized during their declaration. By convention, these variables are automatically initialized to zero by the operating system when the program starts. The name "Block Started by Symbol" is a legacy from older assemblers. (zeroed at startup)
