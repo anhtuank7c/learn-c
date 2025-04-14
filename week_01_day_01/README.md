@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-C is general-purpose, procedural programming language developed in the early 1970s by [*Dennis Ritchie*](https://en.wikipedia.org/wiki/Dennis_Ritchie) at [**Bell Labs**](https://en.wikipedia.org/wiki/Bell_Labs). 
+C is general-purpose, procedural programming language developed in the early 1970s by [*Dennis Ritchie*](https://en.wikipedia.org/wiki/Dennis_Ritchie) at [**Bell Labs**](https://en.wikipedia.org/wiki/Bell_Labs).
 
 It's known for its efficiency, control and flexibility.
 
@@ -25,7 +25,7 @@ Despite being nearly 50 years old, C remains one of the most influential and wid
 * Foundation for others languages (C++ Objective-C, Javascript, Java)
 * Database engines and network servers
 
-## 2. Setting up a professional Development Environment 
+## 2. Setting up a professional Development Environment
 
 > This course is designed for experienced developers so I considered you are familiar with these tools.
 
@@ -104,30 +104,32 @@ There are 4 main phases in compilation process. Understand this is crucial for e
 
 * Expands macros and includes header files
 * Processes conditional compilation directives
-* Command: `gcc -E file.c -o file.i`
+* Command: `gcc -E helloworld.c -o helloworld.i`
 
 **4.2 Compilation**
 
 * Translate preprocessed code to [assembly language](https://en.wikipedia.org/wiki/Assembly_language)
-* Command: `gcc -S file.i -o file.s`
+* Command: `gcc -S helloworld.i -o helloworld.s`
 
 **4.3 Assembly**
 
 * Converts assembly code to object code
-* Command: `gcc -c file.s -o file.o`
+* Command: `gcc -c helloworld.s -o helloworld.o`
 
 **4.4 Linking**
 
 * Combines object files with libraries
 * Create executable or library
-* Command: `gcc file.o -o program`
+* Command: `gcc helloworld.o -o helloworld`
 
+Take a look at compiled files to have better understanding.
 
+![Compilation processes](./compilation_processes.png)
 
 You can do all steps at once:
 
 ```bash
-gcc file.c -o program
+gcc helloworld.c -o helloworld
 ```
 
 **There are several important compiler flags you might want to use**

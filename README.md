@@ -8,7 +8,7 @@ I make this repo is to learn C seriously again, and my clear purpose is to dig i
 
 ## Week 1: C Fundamentals and Professional Development Practices
 
-### [Day 1: C Language Essentials and Development Environment](./week_01.day_01.md)
+### [Day 1: C Language Essentials and Development Environment](./week_01_day_01/README.md)
 
 - C language overview and distinguishing features
 - Setting up a professional development environment
