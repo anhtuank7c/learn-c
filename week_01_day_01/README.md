@@ -124,7 +124,7 @@ There are 4 main phases in compilation process. Understand this is crucial for e
 
 Take a look at compiled files to have better understanding.
 
-![Compilation processes](./compilation_processes.png)
+![Compilation processes](./compilation_process_files.png)
 
 You can do all steps at once:
 
