@@ -52,7 +52,7 @@ Despite being nearly 50 years old, C remains one of the most influential and wid
 
 * GDB: Standard GNU debugger
 * LLDB: LLVM debugger (often used with Clang)
-* Valgrind: Memory error detector
+* Valgrind/Leaks: Memory error detector
 
 **2.5 Version Control:**
 
@@ -83,8 +83,21 @@ xcode-select --install
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Install additional tools
-brew install cmake valgrind
+# We use leaks on Mac since it don't require additional package being installed on your Mac
+# and Valgrind is not compatible with M-series Chip
+
+# Enable stack logs
+export MallocStackLogging=1
+
+# Execute your program, stack logs being generated
+./your_program
+
+# check for memory leak, it will notice which line of code are leaking
+leaks --atExit --list -- ./your_program
+
+# checkout this video for more details
+# https://youtu.be/bhhDRm926qA?si=Z64UnODOtYoBFhwn
+
 ```
 
 **3.3 Windows**
@@ -205,6 +218,8 @@ int calculate_distance(const char *location_a, const char *location_b) {
 ### **5.2 Basic syntax and Control Structures**
 
 TODO: To be Continue
+
+
 
 ## 6. Memory model and Execution flow
 
