@@ -46,6 +46,7 @@ Despite being nearly 50 years old, C remains one of the most influential and wid
 * [VS Code](https://code.visualstudio.com/): with C/C++ extension
 * [Clion](https://www.jetbrains.com/clion/): Full-featured C/C++ IDE
 * [Vim](https://www.vim.org/)/[Emacs](https://www.gnu.org/software/emacs/): with plugins for experienced users
+* [Clion Community](https://www.jetbrains.com/clion/): I don't recommend this one for beginners since it wraps everything in a convenient menu. Instead, you should try the harder approach first to understand the whole process.
 * And much more, you can searching for it on Google.
 
 **2.4 Debugging Tools:**
@@ -217,7 +218,103 @@ int calculate_distance(const char *location_a, const char *location_b) {
 
 ### **5.2 Basic syntax and Control Structures**
 
-TODO: To be Continue
+#### 5.2.1 Variables and Data Types
+
+Define variables by following pattern: `[modifier] [type] = [initial_value];`
+
+Don't forget to end a line of code with semicolon `;`
+
+```c
+unsigned int i = 10; // full options example
+int i = 10; // without modifier
+int i; // without modifier and initial value;
+unsigned int i; // without initial value
+```
+
+C has several fundamental data types such as:
+
+```c
+// Integer
+int i = 10; // standard integer (-2 billion to 2 billion)
+
+short s = 10; // short integer (-32,768 to 32,768)
+short int s2 = 10; // short integer
+
+long a = 1000L; // Long integer
+long long a2 = 10000L; // Long long integer (C99)
+
+// unsigned versions
+unsigned j = 10u;
+unsigned int age = 255; // 0 to 255
+unsigned short e = 65535; // 0 to 65,535
+unsigned short int f = 65535; // 0 to 65,535
+unsigned char d = 255; // 0 to 255, mostly used to read/write file byte to byte. You're treating the file as a raw sequence of bytes (not text or structured data)
+
+// character
+char c = 'A'; // Single char (-128 to 128)
+char name[20] = "Tuan"; // String with maximum 20 characters
+
+// Floating point
+float price = 19.99f; // single precision (6-7 digits after the floating point)
+double salary = 123456; // double precision (15-16 digits precision)
+long double ld = 3.14L; // extended precision
+
+// boolean (C99)
+#include <stdbool.h>
+bool enabled = true; // true/false
+```
+
+**Data types sizes and ranges** (based on architectural and following [IEEE-754 floating point standard](https://en.wikipedia.org/wiki/IEEE_754))
+
+| Type            | Size                                        | Value Range Signed              | Value Range Unsigned |
+| --------------- | ------------------------------------------- | ------------------------------- | -------------------- |
+| char            | 1 byte (8 bits)                             | -128 to 127                     | 0 to 255             |
+| short/short int | 2 bytes (16 bits)                           | -32,768 to 32,767               | 0 to 65,535          |
+| int             | 4 bytes (32 bits)                           | -2,147,483,648 to 2,147,483,647 | 0 to 4,294,967,295   |
+| long            | 4 bytes (32 bits) / 8 bytes (64 bits)       |                                 |                      |
+| long long       | 8 bytes (64 bits)                           |                                 |                      |
+| float           | 4 bytes (32 bits)                           |                                 | Not Applicable       |
+| double          | 8 bytes (64 bits)                           |                                 | Not Applicable       |
+| long double     | typically 16 bytes (x86), 8 or 12 on others |                                 | Not Applicable       |
+
+**Note**:
+
+* `char` can be signed or unsigned depending on the compiler (usually signed on x86, but not guaranteed!).
+
+* `unsigned` versions start from `0` and double the max value of their signed counterpart (but no negative numbers).
+
+* Floating-point (`float`, `double`, `long double`) use IEEE-754 and aren’t simple integer ranges; instead, they have a precision and an exponent range.
+
+* `float` `double` `long double` don't have signed or unsigned  versions in C language. They always signed and can represent both positive and negative numbers including `NaN` `+Infinity` `-Infinity`
+
+  ```c
+  unsigned int a = 10;  // valid
+  unsigned float b = 3.14f;  // invalid! compiler error
+  ```
+
+* `long` size is platform-dependent:
+
+  - On **LP32** systems (older 32-bit) — 4 bytes
+  - On **LP64** systems (modern Linux 64-bit) — 8 bytes
+
+```c
+// Check exact sizes on your system
+#include <stdio.h>
+#include <limits.h>
+#include <float.h>
+
+int main() {
+    printf("char: %d to %d\n", CHAR_MIN, CHAR_MAX);
+    printf("short: %d to %d\n", SHRT_MIN, SHRT_MAX);
+    printf("int: %d to %d\n", INT_MIN, INT_MAX);
+    printf("long: %ld to %ld\n", LONG_MIN, LONG_MAX);
+    printf("long long: %lld to %lld\n", LLONG_MIN, LLONG_MAX);
+    printf("float: %e to %e\n", FLT_MIN, FLT_MAX);
+    printf("double: %e to %e\n", DBL_MIN, DBL_MAX);
+    printf("long double: %Le to %Le\n", LDBL_MIN, LDBL_MAX);
+    return 0;
+}
+```
 
 
 
