@@ -239,6 +239,19 @@ int calculate_distance(const char *location_a, const char *location_b) {
 * Statements: individual instructions ending with semicolons `;`
 * Comments: `// single comment`or `/* multi-line comments */` (C99 and later)
 
+
+
+**Do you wonder why the `main` function needs to return an `int`?**
+
+In C, the language standard requires `main` to return an integer. This integer becomes the program’s **exit code**, which the operating system records when the program finishes.
+
+This is not unique to C — **every program in any programming language** runs as a process in the operating system, and every process has:
+
+- A **PID** (Process ID) so the OS can track and manage it.
+- An **exit code** so the OS and other programs can know how it finished.
+
+If you don’t explicitly set an exit code, your language runtime will set one for you (usually `0` for success). Parent processes (like a shell, script, or service manager) can then use this exit code to trigger specific actions — such as logging, restarting a service, or showing an error message.
+
 ### **5.2 Basic syntax and Control Structures**
 
 #### 5.2.1 Variables and Data Types
