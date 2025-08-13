@@ -139,9 +139,12 @@ There are 4 main phases in compilation process. Understand this is crucial for e
 
 **4.1 Preprocessing**
 
-* Expands macros and includes header files
-* Processes conditional compilation directives
-* Command: `gcc -E helloworld.c -o helloworld.i`
+* Removal of comments
+* Expansion of macros
+* Expansion of includes header files
+* Conditional compilation directives
+
+Command: `gcc -E helloworld.c -o helloworld.i`
 
 **4.2 Compilation**
 
@@ -157,13 +160,21 @@ There are 4 main phases in compilation process. Understand this is crucial for e
 
 * Combines object files with libraries
 * Create executable or library
-* Command: `gcc helloworld.o -o helloworld`
+
+Linking can be 2 types:
+
+- Static linking: all the code is copied to the single file and then executable file is created
+- Dynamic linking: Only the names of the shared libraries is added to the code and then it is referred during the execution
+
+Command: `gcc helloworld.o -o helloworld`
+
+
 
 Take a look at compiled files to have better understanding.
 
 ![Compilation processes](./compilation_process_files.png)
 
-You can do all steps at once:
+Each command from above is just for explanation, you can directly compile C code into executable file like command from below:
 
 ```bash
 gcc helloworld.c -o helloworld
@@ -197,6 +208,13 @@ float global_currency;
 void function_name(int param_a);
 int calculate_distance(const char *location_a, const char *location_b);
 
+typedef struct User {
+  char *fullname;
+  short age;
+  float salary;
+  float expenses;
+};
+
 // main function - entry point of C program
 int main(int argc, char *argv[]) {
 
@@ -209,13 +227,33 @@ int main(int argc, char *argv[]) {
   
   // function calls
   int distance = calculate_distance("Vietnam", "Sweden");
+  User me = {
+    .fullname = "Tuan Nguyen",
+    .age = 36,
+    .salary = 10.1234,
+    .expenses = 1.23
+  };
+  
+  struct Profile {
+      char *name;
+      short age;
+      bool willing_to_relocate;
+      float min_monthly_income;
+      char *currency;
+  } const me = {
+      .name = "Tuan Nguyen Anh",
+      .age = 36,
+      .willing_to_relocate = true,
+      .min_monthly_income = 100.12,
+      .currency = "VND"
+  };
   
   printf("Distance is %d", distance);
   
   /**
   * return exist status of your program to the operating system
   * 0: success execution
-  * non-zero: error or specific exit code based on your need
+  * non-zero: error or specific exit code
   * example of custom code.
   * 1: generic error
   * 2: misuse of shell commands
@@ -252,20 +290,56 @@ This is not unique to C — **every program in any programming language** runs a
 
 If you don’t explicitly set an exit code, your language runtime will set one for you (usually `0` for success). Parent processes (like a shell, script, or service manager) can then use this exit code to trigger specific actions — such as logging, restarting a service, or showing an error message.
 
+I have several documents for exit code:
+
+- https://www.ditig.com/linux-exit-status-codes#list-of-standard-exit-codes
+- https://www.agileconnection.com/article/overview-linux-exit-codes
+- https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-
+- https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/sysexits.3.html
+
 ### **5.2 Basic syntax and Control Structures**
 
 #### 5.2.1 Variables and Data Types
 
-Define variables by following pattern: `[modifier] [type] = [initial_value];`
+Define variables by following pattern: `[data_type] [variable_name] = [initial_value];`
 
 Don't forget to end a line of code with semicolon `;`
 
+`Initial_value` is optional, you are free to assign value to that variable in the future
+
 ```c
+char letter_c = "c";
+char *name = "Nguyen Anh Tuan";
+short age = 36;
 unsigned int i = 10; // full options example
 int i = 10; // without modifier
 int i; // without modifier and initial value;
 unsigned int i; // without initial value
 ```
+
+**Rules for naming variables**
+
+- Must start with a letter or underscore `_`
+- Can contain letters, digits, and underscore `_`
+- Cannot use C keywords (`int`, `return`, `if` etc...)
+- Case-sensitive (`fullName` and `fullname` are different)
+
+**Data types**
+
+| Data Type        | Size (typical) | Format Specifier | Example Value            |
+| ---------------- | -------------- | ---------------- | ------------------------ |
+| `int`            | 2 or 4 bytes   | `%d` / `%i`      | `42`                     |
+| `float`          | 4 bytes        | `%f`             | `3.14`                   |
+| `double`         | 8 bytes        | `%lf`            | `3.14159265`             |
+| `char`           | 1 byte         | `%c`             | `'A'`                    |
+| `_Bool` / `bool` | 1 byte         | `%d`             | `1` (true) / `0` (false) |
+| `long`           |                |                  |                          |
+
+> To use `bool` data type, you have to include `stdbool.h` it got dropped support since C99
+
+**Tips**: to storing currency value in your program, I recommend to use type `long long` (64 bits signed integer). No floating-rounding errors, percise arithmetic, easy comparison. If you don't want negative value, use `unsigned long long` 
+
+
 
 C has several fundamental data types such as:
 
@@ -352,11 +426,84 @@ int main() {
 }
 ```
 
+## 5.2 Commenting
+
+Comment being use for explanation purposes. Sometimes you want to explain or take not in your code, that's completely natural and reasonable.
+
+**Single line comment**:
+
+```c
+// this is a single line comment
+// more line
+// one more
+```
+
+**Multiple line comment**
+
+```c
+/* this
+is
+multiple lines
+commenting /*
+
+/**
+ * or you can
+ * write multiple lines
+ * like this, elegant and 
+ * beautiful
+ */
+
+/**
+ * @brief Do sum 2 numbers
+ * @param a number one
+ * @param b number two
+ * @return total
+ */
+float sum(float a, float b) {
+    return a + b;
+}
+```
+
+**Best practices:**
+
+* Write comments that are easy to understand
+* Do not comment on every line unnecessarily and avoid writing obvious comments
+* Update comments regulary
+* Focus on explaining the intent behind the code rather than restating the obvious 
+
+```c
+// BAD
+
+// Calculate something
+int calc(int a, int b) {}
+
+// Function to calculate total price
+// Take base price
+// Take tax rate
+// Adds them together
+// Return the total
+long long total_price(long long base_price, double tax_rate) {
+	return base_price + (long long)(base_price * (tax_rate / 100.0));
+}
 
 
 
-
-
+// GOOD
+/**
+ * @brief  Calculate the total price including tax.
+ *
+ * @param base_price  The base price in cents.
+ * @param tax_rate    The tax rate as a percentage (e.g., 5.0 for 5%).
+ *
+ * @return The total price in cents.
+ *
+ * @note This function truncates fractional cents.
+ */
+long long total_price(long long base_price, double tax_rate) {
+  // Apply tax and cast to integer cents
+  return base_price + (long long)(base_price * (tax_rate / 100.0));
+}
+```
 
 
 
