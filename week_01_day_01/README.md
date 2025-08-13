@@ -25,6 +25,27 @@ Despite being nearly 50 years old, C remains one of the most influential and wid
 * Foundation for others languages (C++ Objective-C, Javascript, Java)
 * Database engines and network servers
 
+### Pros and cons of C
+
+**Pros**
+
+- Efficicency: C is fast and efficient language that can be used to create high-performance applications, especially on a low/cheap hardware (i.e ESP32)
+- Portability: C can be compiled and run on wide range of platforms and operating systems
+- Low-level access: C provides low-level access to system resources, making it ideal for systems programming and developing operating systems.
+- Widely used: C is widely used language, many modern programming languages are built on top of it (Go, JS, Java, Python etc...)
+
+**Cons**
+
+- Difficult: especially for beginners due it its complex syntax and low-level access to system resources
+- Lack of memory management: C does not provide automatic memory management which can lead to memory leaks and other memory related bugs if not handled properly 
+- No built-in support for OOP: C is procedural programming language so it is not designed to write OOP applications.
+- No built-in support for concurrency: it more difficult to write multithreaded applications compared to languages like Java or Go
+- Security vulnerabilities: C programs are prone to security vulnerabilities, such as buffer overflows, if not written carefully. (You need to maintain memory carefully)
+
+Overall C is a powerfull language with many advantages, but also requires a high degree of expertise to use effectively and has some potential drawbacks, especially for beginners or developers working on complex projects.
+
+>  Manage memory manually is hard but not impossible, I can do it so you can also do it. Just need to follow an effective strategy. Everything will be alright, don't worries.
+
 ## 2. Setting up a professional Development Environment
 
 > This course is designed for experienced developers so I considered you are familiar with these tools.
@@ -32,7 +53,7 @@ Despite being nearly 50 years old, C remains one of the most influential and wid
 **2.1 Compiler options:**
 
 * [GCC (GNU Compiler Collection)](https://gcc.gnu.org/): Standard on Linux/macOS
-* [Clang](https://clang.llvm.org/): Modern compitler with excellents error messages
+* [Clang](https://clang.llvm.org/): Modern compiler with excellents error messages
 * [MinGW](https://www.mingw-w64.org/)/[MSYS2](https://www.msys2.org/): GCC for Windows
 
 **2.2 Build systems:**
@@ -43,17 +64,19 @@ Despite being nearly 50 years old, C remains one of the most influential and wid
 
 **2.3 Editors/IDE:**
 
-* [VS Code](https://code.visualstudio.com/): with C/C++ extension
-* [Clion](https://www.jetbrains.com/clion/): Full-featured C/C++ IDE
-* [Vim](https://www.vim.org/)/[Emacs](https://www.gnu.org/software/emacs/): with plugins for experienced users
-* [Clion Community](https://www.jetbrains.com/clion/): I don't recommend this one for beginners since it wraps everything in a convenient menu. Instead, you should try the harder approach first to understand the whole process.
-* And much more, you can searching for it on Google.
+* [VS Code](https://code.visualstudio.com/): with C/C++ extension (free)
+* Xcode: available on MacOS (free)
+* [Vim](https://www.vim.org/)/[Emacs](https://www.gnu.org/software/emacs/): with plugins for experienced users (free)
+* [Clion IDE](https://www.jetbrains.com/clion/): Nice and efficient IDE for C and C++ (paid and free edition)
+* [CodeBlocks](https://www.codeblocks.org/downloads/): Free and lightweight IDE
+* And much more, you can searching for it on Google Search
 
 **2.4 Debugging Tools:**
 
 * GDB: Standard GNU debugger
 * LLDB: LLVM debugger (often used with Clang)
 * Valgrind/Leaks: Memory error detector
+* Built-in feature of Clion IDE
 
 **2.5 Version Control:**
 
@@ -150,7 +173,7 @@ gcc helloworld.c -o helloworld
 
 * `-Wall -Wextra -Werror`: Enable warnings and treat them as errors
 * `-g`: Include debugging information
-* `-00`though `-03`: Optimize levels from low to high 
+* `-00` though `-03`: Optimize levels from low to high 
 * `--std=c99`or `--std=c11`: Specify C language standard
 
 There are several common C standard you might heard are: [ANSI C, C89, C99, C11, C17, C23](https://en.wikipedia.org/wiki/ANSI_C)
@@ -315,6 +338,12 @@ int main() {
     return 0;
 }
 ```
+
+
+
+
+
+
 
 
 

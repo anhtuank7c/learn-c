@@ -1,10 +1,23 @@
 # Accelerated C Programming for Experienced Programmers (2 Weeks)
 
-I had been learned C in university but honestly, that was useless and I am not good at programming at that time, I also have no idea what a real-life C program is.
+I had been learned C in university but honestly, that was useless and I am not good at programming at that time, I also have no idea what a real-life C program is, the university also don't require students to make a real application.  They just want us to do Math in C. It doesn't make any sense.
 
-I make this repo is to learn C seriously again, and my clear purpose is to dig into [PrimJS](https://github.com/lynx-family/primjs) to understand how it works.
+After roughly 14 years of working in Software industry, I approved myself to learn C again, my purpose is to understand how [PrimJS](https://github.com/lynx-family/primjs) works, how does it share the native object between JS and native world.
+
+I have many years working with React Native but [Lynx](https://lynxjs.org/) is a new wind in hybrid framework, I need to understand it.
 
 **Caution: This course is made for experienced programmers**
+
+### Disclaimer
+
+> I am not writing the whole content all by myself, I learn from many sources and rewrite by my understanding. If any one found copyright issues, please contact me with evidence, I am happy to cooperate with you to take it down or highlight your credits for that. Plus, I share the whole content for free, not for commercial purpose.
+
+**Reference Sources:**
+
+- AI (Grok, ChatGPT)
+- geeksforgeeks.org
+- c-language.org
+- cprogramming.com
 
 ## Week 1: C Fundamentals and Professional Development Practices
 
