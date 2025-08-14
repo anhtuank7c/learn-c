@@ -336,9 +336,18 @@ j = 20;
 - `int`: 32 bits
 
 - `float`: 32 bits
+
 - `double`: 64 bits
+
 - `char`: 8 bits
-- `bool`: 1 (stored in at least 8 bits)
+
+- `bool`: logically need **1 bit** (physically stored in at least **8 bits** because C standard requires that the size of any object is at least 1 bytes = 8 bits).
+
+  ```c
+  bool male = true;
+  printf("sizes: %d", sizeof(male)); // sizes: 1
+  ```
+
 - `void`: -
 
 C provide several modifications to **expand** or **restrict** the attributes of fundamental types (adjusting size, range, sign behavior)
