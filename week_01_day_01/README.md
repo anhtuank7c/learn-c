@@ -301,43 +301,70 @@ I have several documents for exit code:
 
 #### 5.2.1 Variables and Data Types
 
+#### Variable definition syntax
+
 Define variables by following pattern: `[data_type] [variable_name] = [initial_value];`
 
-Don't forget to end a line of code with semicolon `;`
-
-`Initial_value` is optional, you are free to assign value to that variable in the future
+`Initial_value` is optional, you can just define variable like this: `[data_type] [variable_name];`
 
 ```c
-char letter_c = "c";
-char *name = "Nguyen Anh Tuan";
+char letter_a = 'a'; // use single quotes symbol for char (single character literal)
+char *name = "Nguyen Anh Tuan"; // use double quotes symbol for string (string literal)
+char fullname[5] = "TuanNguyen"; // string is an array of char
+printf("%s", fullname); // TuanN // just store 5 characters
 short age = 36;
-unsigned int i = 10; // full options example
 int i = 10; // without modifier
-int i; // without modifier and initial value;
-unsigned int i; // without initial value
+int j; // without modifier and initial value;
+j = 20;
 ```
 
-**Rules for naming variables**
+
+
+#### Rules for naming variables
 
 - Must start with a letter or underscore `_`
 - Can contain letters, digits, and underscore `_`
 - Cannot use C keywords (`int`, `return`, `if` etc...)
 - Case-sensitive (`fullName` and `fullname` are different)
 
-**Data types**
 
-| Data Type        | Size (typical) | Format Specifier | Example Value            |
-| ---------------- | -------------- | ---------------- | ------------------------ |
-| `int`            | 2 or 4 bytes   | `%d` / `%i`      | `42`                     |
-| `float`          | 4 bytes        | `%f`             | `3.14`                   |
-| `double`         | 8 bytes        | `%lf`            | `3.14159265`             |
-| `char`           | 1 byte         | `%c`             | `'A'`                    |
-| `_Bool` / `bool` | 1 byte         | `%d`             | `1` (true) / `0` (false) |
-| `long`           |                |                  |                          |
 
-> To use `bool` data type, you have to include `stdbool.h` it got dropped support since C99
+#### Data types:
 
-**Tips**: to storing currency value in your program, I recommend to use type `long long` (64 bits signed integer). No floating-rounding errors, percise arithmetic, easy comparison. If you don't want negative value, use `unsigned long long` 
+##### Basic data types:
+
+- `int`: 32 bits
+
+- `float`: 32 bits
+- `double`: 64 bits
+- `char`: 8 bits
+- `bool`: 1 (stored in at least 8 bits)
+- `void`: -
+
+C provide several modifications to **expand** or **restrict** the attributes of fundamental types (adjusting size, range, sign behavior)
+
+- `short`: reduces the size and range of an integer (e.g `short int` typically use 16 bits)
+- `long`: increase the size and range (e.g `long int`, `long long`, `long long int`, `long double`)
+- `signed`: explicitly indicate the type stores both negative and positive numbers
+- `unsigned`: restricts the type to non-negative values
+
+
+
+##### Derived data types:
+
+- `array`
+- `pointer`
+- `function`
+
+
+
+##### User defined data types:
+
+- `union`
+- `structure`
+- `enum`
+
+**Tips**: to storing currency value in your program, I recommend to use type `long long` (64 bits signed integer). No floating-rounding errors, percise arithmetic, easy comparison.
 
 
 
