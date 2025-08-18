@@ -333,29 +333,50 @@ j = 20;
 
 ##### Basic data types:
 
-- `int`: 32 bits
+- `int`: 4 bytes
 
-- `float`: 32 bits
+- `float`: 4 bytes
 
-- `double`: 64 bits
+- `double`: 8 bytes
 
-- `char`: 8 bits
+- `char`: 1 byte
 
-- `bool`: logically need **1 bit** (physically stored in at least **8 bits** because C standard requires that the size of any object is at least 1 bytes = 8 bits).
+- `bool`: logically need **1 bit** (physically stored in at least **8 bits** (1 byte) because C standard requires that the size of any object is at least 1 byte = 8 bits).
 
   ```c
   bool male = true;
   printf("sizes: %d", sizeof(male)); // sizes: 1
   ```
 
-- `void`: -
+- `void`: 0 byte
 
-C provide several modifications to **expand** or **restrict** the attributes of fundamental types (adjusting size, range, sign behavior)
+C provide several modifications to ***expand*** or ***restrict*** the attributes of fundamental types (adjusting *size*, *range*, *sign* behavior)
 
-- `short`: reduces the size and range of an integer (e.g `short int` typically use 16 bits)
-- `long`: increase the size and range (e.g `long int`, `long long`, `long long int`, `long double`)
-- `signed`: explicitly indicate the type stores both negative and positive numbers
-- `unsigned`: restricts the type to non-negative values
+- `short`: reduces the size and range of an integer (e.g `short int` typically use 2 bytes). Only valid with `int`. `short = short int`, you can use only keyword `short` to present `short int` but remember it ensure the range will not wider than `int`
+- `long`: increases the size and range (e.g., `long int`, `long long int`, `long double`). Usually applied to `int` and `double`. `long = long int` but remember `long` keyword implicitely mean it will ensure range bigger than `int`, you can use only keyword `long` to present `long int`. `long` keyword tell the compiler to make this type wider than plain type (or at least not smaller). It does not guarantee the same size across all platforms. Only valid with `int` or `double`
+- `signed`: allows both negative and positive values (default for most integer types). The first bit from the left represent the sign (**1**: for negative, **0**: for positive). i.e `1000 0000 = -128` the first number `1` means `negative`
+- `unsigned`: restricts values to non-negative, effectively doubling the positive range. The sign bit from above being use to represent value, no need a bit for the sign.
+
+```c
+int age; // 4 bytes
+short age; // 2 bytes
+short int age; // 2 bytes
+unsigned int age; // 2 bytes
+unsigned short age; // 2 bytes
+long int age; // 8 bytes
+long age; // 8 bytes
+long long int; // 8 bytes
+double age; // 8 bytes
+long double age; // 16 bytes
+```
+
+**Here's the full chain for standard C data types:**
+
+`sizeof(_Bool) <= sizeof(char) <= sizeof(short) <= sizeof(int) <= sizeof(long) <= sizeof(long long) <= sizeof(float) <= sizeof(double) <= sizeof(long double)`
+
+
+
+**Tips**: to storing currency value in your program, I recommend to use type `long long` (8 bytes signed integer). No floating-rounding errors, percise arithmetic, easy comparison.
 
 
 
@@ -373,42 +394,7 @@ C provide several modifications to **expand** or **restrict** the attributes of 
 - `structure`
 - `enum`
 
-**Tips**: to storing currency value in your program, I recommend to use type `long long` (64 bits signed integer). No floating-rounding errors, percise arithmetic, easy comparison.
 
-
-
-C has several fundamental data types such as:
-
-```c
-// Integer
-int i = 10; // standard integer (-2 billion to 2 billion)
-
-short s = 10; // short integer (-32,768 to 32,768)
-short int s2 = 10; // short integer
-
-long a = 1000L; // Long integer
-long long a2 = 10000L; // Long long integer (C99)
-
-// unsigned versions
-unsigned j = 10u;
-unsigned int age = 255; // 0 to 255
-unsigned short e = 65535; // 0 to 65,535
-unsigned short int f = 65535; // 0 to 65,535
-unsigned char d = 255; // 0 to 255, mostly used to read/write file byte to byte. You're treating the file as a raw sequence of bytes (not text or structured data)
-
-// character
-char c = 'A'; // Single char (-128 to 128)
-char name[20] = "Tuan"; // String with maximum 20 characters
-
-// Floating point
-float price = 19.99f; // single precision (6-7 digits after the floating point)
-double salary = 123456; // double precision (15-16 digits precision)
-long double ld = 3.14L; // extended precision
-
-// boolean (C99)
-#include <stdbool.h>
-bool enabled = true; // true/false
-```
 
 **Data types sizes and ranges** (based on architectural and following [IEEE-754 floating point standard](https://en.wikipedia.org/wiki/IEEE_754))
 
@@ -422,45 +408,6 @@ bool enabled = true; // true/false
 | float           | 4 bytes (32 bits)                           |                                 | Not Applicable       |
 | double          | 8 bytes (64 bits)                           |                                 | Not Applicable       |
 | long double     | typically 16 bytes (x86), 8 or 12 on others |                                 | Not Applicable       |
-
-**Note**:
-
-* `char` can be signed or unsigned depending on the compiler (usually signed on x86, but not guaranteed!).
-
-* `unsigned` versions start from `0` and double the max value of their signed counterpart (but no negative numbers).
-
-* Floating-point (`float`, `double`, `long double`) use IEEE-754 and aren’t simple integer ranges; instead, they have a precision and an exponent range.
-
-* `float` `double` `long double` don't have signed or unsigned  versions in C language. They always signed and can represent both positive and negative numbers including `NaN` `+Infinity` `-Infinity`
-
-  ```c
-  unsigned int a = 10;  // valid
-  unsigned float b = 3.14f;  // invalid! compiler error
-  ```
-
-* `long` size is platform-dependent:
-
-  - On **LP32** systems (older 32-bit) — 4 bytes
-  - On **LP64** systems (modern Linux 64-bit) — 8 bytes
-
-```c
-// Check exact sizes on your system
-#include <stdio.h>
-#include <limits.h>
-#include <float.h>
-
-int main() {
-    printf("char: %d to %d\n", CHAR_MIN, CHAR_MAX);
-    printf("short: %d to %d\n", SHRT_MIN, SHRT_MAX);
-    printf("int: %d to %d\n", INT_MIN, INT_MAX);
-    printf("long: %ld to %ld\n", LONG_MIN, LONG_MAX);
-    printf("long long: %lld to %lld\n", LLONG_MIN, LLONG_MAX);
-    printf("float: %e to %e\n", FLT_MIN, FLT_MAX);
-    printf("double: %e to %e\n", DBL_MIN, DBL_MAX);
-    printf("long double: %Le to %Le\n", LDBL_MIN, LDBL_MAX);
-    return 0;
-}
-```
 
 ## 5.2 Commenting
 
