@@ -574,41 +574,45 @@ PI = 9.8; // ERROR, cannot reassign value to a constant variable
 
 ## 5.2 Commenting
 
-Comment being use for explanation purposes. Sometimes you want to explain or take not in your code, that's completely natural and reasonable.
+Comment being use for explanation purposes. Sometimes you want to explain or take note in your code, that's completely natural and reasonable.
 
-**Single line comment**:
+There are 2 kinds of comments:
 
-```c
-// this is a single line comment
-// more line
-// one more
-```
+- **Single line comment**:
 
-**Multiple line comment**
+  ```c
+  // this is a single line comment
+  // more line
+  // one more
+  ```
 
-```c
-/* this
-is
-multiple lines
-commenting /*
+- **Multiple line comment**
 
-/**
- * or you can
- * write multiple lines
- * like this, elegant and 
- * beautiful
- */
+  ```c
+  /* this
+  is
+  multiple lines
+  commenting /*
+  
+  /**
+   * or you can
+   * write multiple lines
+   * like this, elegant and 
+   * beautiful
+   */
+  
+  /**
+   * @brief Do sum 2 numbers
+   * @param a number one
+   * @param b number two
+   * @return total
+   */
+  float sum(float a, float b) {
+      return a + b;
+  }
+  ```
 
-/**
- * @brief Do sum 2 numbers
- * @param a number one
- * @param b number two
- * @return total
- */
-float sum(float a, float b) {
-    return a + b;
-}
-```
+  
 
 **Best practices:**
 
