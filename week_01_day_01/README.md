@@ -330,7 +330,23 @@ j = 20;
 - Cannot use C keywords (`int`, `return`, `if` etc...)
 - Case-sensitive (`fullName` and `fullname` are different)
 
+You can define multiple variables at once using comma `,` symbol
 
+```c
+long first_variable, second_variable;
+first_variable = 10;
+second_variable = 20;
+
+int first = 1, second = 2, third;
+third = 3;
+```
+
+or even with an expression
+
+```c
+double total_expense = 10200000 - 129320;
+printf("\nTotal expense: %f", total_expense); // Total expense: 10070680.000000
+```
 
 #### Data types:
 
@@ -411,6 +427,150 @@ long double age; // 16 bytes
 | float           | 4 bytes (32 bits)                           |                                 | Not Applicable       |
 | double          | 8 bytes (64 bits)                           |                                 | Not Applicable       |
 | long double     | typically 16 bytes (x86), 8 or 12 on others |                                 | Not Applicable       |
+
+**Memory allocation of C variables**
+
+When a variable is **declared**, the compiler is told that the variable with the given name and type exists in the program. But no memory is allocated to it yet. Memory is allocated when the variable is **defined**.
+
+The size of memory assigned for variables depends on the type of variable. We can check the size using `sizeof` keyword
+
+```c
+int age;
+printf("sizeof(age) = %d bytes\n", sizeof(age)); // sizeof(age) = 4 bytes
+```
+
+#### 5.2.2 Scope of variable
+
+In C, **scope** defines the part of the program where a variable is accessible. It determines the variable’s lifetime and visibility. There are mainly four types of scope:
+
+1. **Local scope**
+
+   The local scope refers to the region inside a block or a function. It is the space enclosed between the `{}` curly braces symbols.
+
+   - The variables declared within the local scope are called **local variables**
+   - Local variables are visible in the block they are declared in and other blocks nested inside that block
+   - Local scope is also called **block scope**
+   - Local variables have no linkage
+
+   ```c
+   #include <stdio.h>
+   
+   int main(void) {
+     {
+       int a = 10, b = 20;
+       {
+         // nested block can access outer variables
+         printf("\na = %d, b = %d", a, b);
+         {
+           // a, b declared again
+           // so it cannot access outer variables
+           // it access local variables within this scope instead
+           float a = 9.9, b = 19.9;
+           printf("\na = %f, b = %f", a, b);
+         }
+         // statement access outer variables
+         printf("\na = %d, b = %d", a, b);
+       }
+     }
+     // cannot access any variables since no variables declared
+     // within this scope
+     printf("\na = %d, b = %d", a, b);
+     return 0;
+   }
+   
+   // Result
+   // a = 10, b = 20
+   // a = 9.900000, b = 19.900000
+   // a = 10, b = 20
+   ```
+
+2. **Global scope**
+
+   - The variables declared in the global scope are called global variables
+
+   - Global variables are visible in every part of the program
+
+   - Global is also called **File scope** as the scope of an identifier starts at the beginning of the file and ends at the end of the file.
+
+     ```c
+     // global scope
+     float g = 9.8;
+     
+     void func_name() {
+       printf("G = %f\n", g);
+     }
+     
+     int main(void) {
+       printf("G = %f\n", g);
+       g = 10;
+       func_name();
+       return 0;
+     }
+     
+     /*
+     Result:
+     
+     G = 9.800000
+     G = 10.000000
+     */
+     ```
+
+   - Have external linkage by default. It means that the variables declared in the global scope can be accessed in another C source file. Use `extern` keyword for that purpose.
+
+     ```c
+     // my_lib.c
+     #include <stdio.h>
+     
+     float pi = 3.141592;
+     void print_pi() {
+       printf("PI = %f", pi);
+     }
+     
+     // use "static" keyword to restrict access to the my_lib.c file only.
+     static float g_force = 9.8;
+     
+     void print_g_force() {
+       printf("G = %f\n", g_force);
+     }
+     
+     // main.c
+     #include <stdio.h>
+     
+     extern float pi;
+     extern float g_force;
+     
+     // define function prototype in my_lib.c
+     // you don't have to implement this function since it already defined in my_lib.c
+     void print_pi();
+     void print_g_force();
+     
+     int main(void) {
+       printf("PI constant: %f", pi);
+       print_pi(); // invoke print_pi function from my_lib.c
+       print_g_force(); // invoke print_g_force function from my_lib.c
+       printf("g_force: %f\n", g_force); // compiler will throw an error at this line
+       return 0;
+     }
+     
+     ```
+
+     To restrict access to the current file only, global variables can be marked as `static`
+
+
+
+#### 5.2.3 Constant variables
+
+In C, you can create variables whose values cannot be modified after initialization by using the `const` keyword. These are called **constants variables**.
+
+```c
+const float PI = 3.1412;
+
+PI = 9.8; // ERROR, cannot reassign value to a constant variable
+```
+
+- A `const` variable **must be initialized at the time of declaration** (otherwise it will have an undefined value that cannot be changed later).
+
+- By convention, constants are often written in **UPPER_CASE** to emphasize that they should not be modified, e.g., `PI`, `MAX_SIZE`.
 
 ## 5.2 Commenting
 
