@@ -572,7 +572,7 @@ PI = 9.8; // ERROR, cannot reassign value to a constant variable
 
 - By convention, constants are often written in **UPPER_CASE** to emphasize that they should not be modified, e.g., `PI`, `MAX_SIZE`.
 
-## 5.2 Commenting
+## 5.2 Comment
 
 Comment being use for explanation purposes. Sometimes you want to explain or take note in your code, that's completely natural and reasonable.
 
@@ -584,6 +584,7 @@ There are 2 kinds of comments:
   // this is a single line comment
   // more line
   // one more
+  // TODO: need to investigate
   ```
 
 - **Multiple line comment**
@@ -653,6 +654,9 @@ long long total_price(long long base_price, double tax_rate) {
   // Apply tax and cast to integer cents
   return base_price + (long long)(base_price * (tax_rate / 100.0));
 }
+
+// TODO: need concrete implement
+void func_name();
 ```
 
 
