@@ -572,7 +572,7 @@ PI = 9.8; // ERROR, cannot reassign value to a constant variable
 
 - By convention, constants are often written in **UPPER_CASE** to emphasize that they should not be modified, e.g., `PI`, `MAX_SIZE`.
 
-## 5.2 Comment
+#### 5.3 Comment
 
 Comment being use for explanation purposes. Sometimes you want to explain or take note in your code, that's completely natural and reasonable.
 
