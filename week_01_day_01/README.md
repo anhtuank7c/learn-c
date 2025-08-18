@@ -576,7 +576,7 @@ PI = 9.8; // ERROR, cannot reassign value to a constant variable
 
 Comment being use for explanation purposes. Sometimes you want to explain or take note in your code, that's completely natural and reasonable.
 
-There are 2 kinds of comments:
+There are 2 types of comments:
 
 - **Single line comment**:
 
@@ -609,6 +609,7 @@ There are 2 kinds of comments:
    * @return total
    */
   float sum(float a, float b) {
+    	// TODO: do something
       return a + b;
   }
   ```
@@ -657,6 +658,124 @@ long long total_price(long long base_price, double tax_rate) {
 
 // TODO: need concrete implement
 void func_name();
+```
+
+### 5.3 Literals
+
+In C, literals are the constant values that are assigned to the variables. Literals represent fixed values that cannot be modified. Literals contain memory but they do not have references as variables. Generally, both terms, constants and literrals are used interchangeably.
+
+There are 5 types of literals in C:
+
+#### 5.3.1 **Integer Literal**
+
+- Whole numbers without fractional part.
+
+- Written in:
+
+  - ***Prefixes***:
+
+    There are basically represented into 4 types:
+
+    - Decimal-literal (base 10): A non-zero decimal digit followed by zero or more decimal digits (0-9)
+
+      ```c
+      int x = 10;   // 10 is an integer literal
+      ```
+
+    - Octal-literal (base 8): a `0` followed by zero or more digits (0-7)
+
+      ```c
+      int b = 012;
+      int c = 0172;
+      int d = 0761;
+      ```
+
+    - Hex-literal (base 16): `0x` or `0X` followed by one or more HexaDecimal digits (0-9, a-f, A-F)
+
+      ```c
+      int e = 0x10F;
+      int f = 0X99FAB;
+      ```
+
+  - ***Suffixes***:
+
+    The suffixes of the integer literal indicates the type in which it is to be read, the order of suffixes doesn't matter.
+
+    - `U`or `u` for unsigned
+    - `L` or `l` for long
+    - `UL` or `ul` for unsigned long
+    - `F` or `f` for float
+
+    ```c
+    long long int a = 123456789LL;
+    // indicates a long long int value 123456789 because of the suffix LL
+    
+    unsigned int b = 991123u;
+    unsigned int c = 991123U;
+    // indicates a unsigned int value 991123 because of the suffix u or U
+    
+    long int d = 123l;
+    long int e = 123L;
+    // indicates long int value 123 because of the suffix l or L
+    
+    unsigned long int f = 123ul; // unsigned long int
+    unsigned long int f = 123uL; // unsigned long int
+    unsigned long int f = 123UL; // unsigned long int
+    
+    long long int f = 123ll; // long long int
+    long long int f = 123LL; // long long int
+    
+    unsigned long long int f = 123ull; // unsigned long long int
+    unsigned long long int f = 123ULL; // unsigned long long int
+    
+    float g_force = 9.8f;
+    ```
+
+#### 5.3.2 **Floating Point Literal**
+
+Numbers with decimal point or in exponential form
+
+```c
+float pi = 3.1415f;
+double exp = 2.5e3; // 2.5 * 10^3 = 2500.0
+```
+
+#### 5.3.3 **Character Literal**
+
+Single character inside single quotes `' '`
+
+Represented by:
+
+- Normal characters: `'A'`, `'B'` etc...
+- Escape sequences: `\n`, `\t`, `\\`
+- ASCII values (integer equivalent of char)
+
+```c
+char letter_a = 'A';
+char letter_b = 'B';
+char new_line = '\n';
+```
+
+#### 5.3.4 **String Literal**
+
+A sequence of characters inside double quotes `" "`
+
+Automatically ends with null character `\0`
+
+```c
+char str[] = "Hello";
+// stored as {'H', 'e', 'l', 'l', 'o', '\0'}
+```
+
+#### 5.3.5 **Boolean Literal (since C99 via <stdbool.h>)**
+
+C does not have built-in boolean type in older versions, but since C99 we can use boolean like below
+
+```c
+#include <stdbool.h>
+
+bool is_true = true;
+bool is_false = false;
 ```
 
 
