@@ -198,7 +198,10 @@ There are several common C standard you might heard are: [ANSI C, C89, C99, C11,
 ```c
 // Preprocessor directives
 #include <stdio.h>
-#define MAX_SIZE 100 // macro to define a constant, preprocessor will replace MAX_SIZE by 100
+#define MAX_SIZE 100 // defines a macro. During preprocessing, every occurrence of MAX_SIZE in the code will be replaced with the literal 100 before compilation.
+
+// In modern C, people often prefer this way to define a constant
+const int MAX_SIZE = 100;
 
 // global variables and declarations
 int global_int_variable;
