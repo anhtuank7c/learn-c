@@ -160,22 +160,26 @@ There are 4 main phases in compilation process. Understand this is crucial for e
 * Expansion of includes header files
 * Conditional compilation directives
 
+This phrase will generate a larger version of the C program, you can open `helloworld.i` to read the whole content.
+
 Command: `gcc -E helloworld.c -o helloworld.i`
 
 **4.2 Compilation**
 
 * Translate preprocessed code to [assembly language](https://en.wikipedia.org/wiki/Assembly_language)
-* Command: `gcc -S helloworld.i -o helloworld.s`
+
+Command: `gcc -S helloworld.i -o helloworld.s`
 
 **4.3 Assembly**
 
 * Converts assembly code to object code
-* Command: `gcc -c helloworld.s -o helloworld.o`
+
+Command: `gcc -c helloworld.s -o helloworld.o`
 
 **4.4 Linking**
 
 * Combines object files with libraries
-* Create executable or library
+* Create executable file or library
 
 Linking can be 2 types:
 
