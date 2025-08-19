@@ -668,76 +668,96 @@ There are 5 types of literals in C:
 
 #### 5.3.1 **Integer Literal**
 
-- Whole numbers without fractional part.
+Whole numbers without fractional part.
 
-- Written in:
+- ***Prefixes***:
 
-  - ***Prefixes***:
+  There are basically represented into 3 types:
 
-    There are basically represented into 4 types:
+  - Decimal-literal (base 10)
 
-    - Decimal-literal (base 10): A non-zero decimal digit followed by zero or more decimal digits (0-9)
-
-      ```c
-      int x = 10;   // 10 is an integer literal
-      ```
-
-    - Octal-literal (base 8): a `0` followed by zero or more digits (0-7)
-
-      ```c
-      int b = 012;
-      int c = 0172;
-      int d = 0761;
-      ```
-
-    - Hex-literal (base 16): `0x` or `0X` followed by one or more HexaDecimal digits (0-9, a-f, A-F)
-
-      ```c
-      int e = 0x10F;
-      int f = 0X99FAB;
-      ```
-
-  - ***Suffixes***:
-
-    The suffixes of the integer literal indicates the type in which it is to be read, the order of suffixes doesn't matter.
-
-    - `U`or `u` for unsigned
-    - `L` or `l` for long
-    - `UL` or `ul` for unsigned long
-    - `F` or `f` for float
+    A non-zero decimal digit followed by zero or more decimal digits (0-9)
 
     ```c
-    long long int a = 123456789LL;
-    // indicates a long long int value 123456789 because of the suffix LL
-    
-    unsigned int b = 991123u;
-    unsigned int c = 991123U;
-    // indicates a unsigned int value 991123 because of the suffix u or U
-    
-    long int d = 123l;
-    long int e = 123L;
-    // indicates long int value 123 because of the suffix l or L
-    
-    unsigned long int f = 123ul; // unsigned long int
-    unsigned long int f = 123uL; // unsigned long int
-    unsigned long int f = 123UL; // unsigned long int
-    
-    long long int f = 123ll; // long long int
-    long long int f = 123LL; // long long int
-    
-    unsigned long long int f = 123ull; // unsigned long long int
-    unsigned long long int f = 123ULL; // unsigned long long int
-    
-    float g_force = 9.8f;
+    int x = 10;   // 10 is an integer literal
     ```
+
+  - Octal-literal (base 8)
+
+    A `0` followed by zero or more digits (0-7)
+
+    ```c
+    int b = 012;
+    int c = 0172;
+    int d = 0761;
+    ```
+
+  - Hex-literal (base 16)
+
+    `0x` or `0X` followed by one or more HexaDecimal digits (0-9, a-f, A-F)
+
+    ```c
+    int e = 0x10F;
+    int f = 0X99FAB;
+    int g = 0x99ab;
+    ```
+
+- ***Suffixes***:
+
+  The suffixes of the integer literal indicates the type in which it is to be read, the order of suffixes doesn't matter.
+
+  - `U`or `u` for unsigned
+  - `L` or `l` for long
+  - `UL` or `ul` for unsigned long
+  - `F` or `f` for float
+
+  ```c
+  long long int a = 123456789LL;
+  // indicates a long long int value 123456789 because of the suffix LL
+  
+  unsigned int b = 991123u;
+  unsigned int c = 991123U;
+  // indicates a unsigned int value 991123 because of the suffix u or U
+  
+  long int d = 123l;
+  long int e = 123L;
+  // indicates long int value 123 because of the suffix l or L
+  
+  unsigned long int f = 123ul; // unsigned long int
+  unsigned long int f = 123uL; // unsigned long int
+  unsigned long int f = 123UL; // unsigned long int
+  unsigned long int f = 123LU; // unsigned long int, the order of suffixes doesn't matter
+  
+  long long int f = 123ll; // long long int
+  long long int f = 123LL; // long long int
+  
+  unsigned long long int f = 123ull; // unsigned long long int
+  unsigned long long int f = 123ULL; // unsigned long long int
+  
+  float g_force = 9.8f;
+  ```
 
 #### 5.3.2 **Floating Point Literal**
 
-Numbers with decimal point or in exponential form
+The floating point literal can be stored in either decimal or exponent form.
+
+While representing floating point decimals one must keep two things in mind to produce valid literal:
+
+- In the decimal form, one must include the integer part, or fraction part, or both.
+- In the exponent form, one must include both the significant and exponent part.
 
 ```c
-float pi = 3.1415f;
+// VALID
+float pi = 3.1415;
+double sin = 1.125e-10L; // 1.125 * 10^(-10)
+double cost = 1.125 * pow(10, -10); // 1.125 * 10^(-10)
 double exp = 2.5e3; // 2.5 * 10^3 = 2500.0
+
+
+// INVALID
+float pi = 3E;
+double sin = 1125f;
+double exp = 0.e3;
 ```
 
 #### 5.3.3 **Character Literal**
@@ -746,13 +766,14 @@ Single character inside single quotes `' '`
 
 Represented by:
 
-- Normal characters: `'A'`, `'B'` etc...
+- Normal characters: `'A'`, `'B'`, `a`, `b` etc...
 - Escape sequences: `\n`, `\t`, `\\`
 - ASCII values (integer equivalent of char)
 
 ```c
 char letter_a = 'A';
 char letter_b = 'B';
+char letter_c = 'c';
 char new_line = '\n';
 ```
 
