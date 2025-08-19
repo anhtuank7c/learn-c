@@ -300,9 +300,99 @@ I have several documents for exit code:
 - https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-
 - https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/sysexits.3.html
 
-### **5.2 Basic syntax and Control Structures**
+### 5.2 Comment in C
 
-#### 5.2.1 Variables and Data Types
+Comment being use for explanation purposes. Sometimes you want to explain or take note in your code, that's completely natural and reasonable.
+
+There are 2 types of comments:
+
+- **Single line comment**:
+
+  ```c
+  // this is a single line comment
+  // more line
+  // one more
+  // TODO: need to investigate
+  ```
+
+- **Multiple line comment**
+
+  ```c
+  /* this
+  is
+  multiple lines
+  commenting /*
+  
+  /**
+   * or you can
+   * write multiple lines
+   * like this, elegant and 
+   * beautiful
+   */
+  
+  /**
+   * @brief Do sum 2 numbers
+   * @param a number one
+   * @param b number two
+   * @return total
+   */
+  float sum(float a, float b) {
+    	// TODO: do something
+      return a + b;
+  }
+  ```
+
+  
+
+**Best practices:**
+
+* Write comments that are easy to understand
+* Do not comment on every line unnecessarily and avoid writing obvious comments
+* Update comments regulary
+* Focus on explaining the intent behind the code rather than restating the obvious 
+
+```c
+// BAD
+
+// Calculate something
+int calc(int a, int b) {}
+
+// Function to calculate total price
+// Take base price
+// Take tax rate
+// Adds them together
+// Return the total
+long long total_price(long long base_price, double tax_rate) {
+	return base_price + (long long)(base_price * (tax_rate / 100.0));
+}
+
+
+
+// GOOD
+/**
+ * @brief  Calculate the total price including tax.
+ *
+ * @param base_price  The base price in cents.
+ * @param tax_rate    The tax rate as a percentage (e.g., 5.0 for 5%).
+ *
+ * @return The total price in cents.
+ *
+ * @note This function truncates fractional cents.
+ */
+long long total_price(long long base_price, double tax_rate) {
+  // Apply tax and cast to integer cents
+  return base_price + (long long)(base_price * (tax_rate / 100.0));
+}
+
+// TODO: need concrete implement
+void func_name();
+```
+
+### 
+
+### **5.3 Basic syntax and Control Structures**
+
+#### 5.3.1 Variables and Data Types
 
 #### Variable definition syntax
 
@@ -447,11 +537,11 @@ C provide several modifications to ***expand*** or ***restrict*** the attributes
 | double          | 8 bytes (64 bits)                           |                                 | Not Applicable       |
 | long double     | typically 16 bytes (x86), 8 or 12 on others |                                 | Not Applicable       |
 
-#### 5.2.2 Scope of variable
+#### 5.3.2 Scope of variable
 
 In C, **scope** defines the part of the program where a variable is accessible. It determines the variable’s lifetime and visibility. There are mainly 2 types of scope:
 
-##### 5.2.2.1 **Local scope**
+##### 5.3.2.1 **Local scope**
 
 The local scope refers to the region inside a block or a function. It is the space enclosed between the `{}` curly braces symbols.
 
@@ -492,7 +582,7 @@ int main(void) {
 // a = 10, b = 20
 ```
 
-##### 5.2.2.2 **Global scope**
+##### 5.3.2.2 **Global scope**
 
 - The variables declared in the global scope are called global variables
 
@@ -564,7 +654,7 @@ int main(void) {
 
   To restrict access to the current file only, global variables can be marked as `static`
 
-#### 5.2.3 Constant variables
+#### 5.3.3 Constant variables
 
 In C, you can create variables whose values cannot be modified after initialization by using the `const` keyword. These are called **constants variables**.
 
@@ -578,101 +668,13 @@ PI = 9.8; // ERROR, cannot reassign value to a constant variable
 
 - By convention, constants are often written in **UPPER_CASE** to emphasize that they should/could not be modified, e.g., `PI`, `MAX_SIZE`.
 
-#### 5.2.4 Comment
-
-Comment being use for explanation purposes. Sometimes you want to explain or take note in your code, that's completely natural and reasonable.
-
-There are 2 types of comments:
-
-- **Single line comment**:
-
-  ```c
-  // this is a single line comment
-  // more line
-  // one more
-  // TODO: need to investigate
-  ```
-
-- **Multiple line comment**
-
-  ```c
-  /* this
-  is
-  multiple lines
-  commenting /*
-  
-  /**
-   * or you can
-   * write multiple lines
-   * like this, elegant and 
-   * beautiful
-   */
-  
-  /**
-   * @brief Do sum 2 numbers
-   * @param a number one
-   * @param b number two
-   * @return total
-   */
-  float sum(float a, float b) {
-    	// TODO: do something
-      return a + b;
-  }
-  ```
-
-  
-
-**Best practices:**
-
-* Write comments that are easy to understand
-* Do not comment on every line unnecessarily and avoid writing obvious comments
-* Update comments regulary
-* Focus on explaining the intent behind the code rather than restating the obvious 
-
-```c
-// BAD
-
-// Calculate something
-int calc(int a, int b) {}
-
-// Function to calculate total price
-// Take base price
-// Take tax rate
-// Adds them together
-// Return the total
-long long total_price(long long base_price, double tax_rate) {
-	return base_price + (long long)(base_price * (tax_rate / 100.0));
-}
-
-
-
-// GOOD
-/**
- * @brief  Calculate the total price including tax.
- *
- * @param base_price  The base price in cents.
- * @param tax_rate    The tax rate as a percentage (e.g., 5.0 for 5%).
- *
- * @return The total price in cents.
- *
- * @note This function truncates fractional cents.
- */
-long long total_price(long long base_price, double tax_rate) {
-  // Apply tax and cast to integer cents
-  return base_price + (long long)(base_price * (tax_rate / 100.0));
-}
-
-// TODO: need concrete implement
-void func_name();
-```
-
-### 5.3 Literals
+### 5.4 Literals
 
 In C, literals are the constant values that are assigned to the variables. Literals represent fixed values that cannot be modified. Literals contain memory but they do not have references as variables. Generally, both terms, constants and literrals are used interchangeably.
 
 There are 5 types of literals in C:
 
-#### 5.3.1 **Integer Literal**
+#### 5.4.1 **Integer Literal**
 
 Whole numbers without fractional part.
 
@@ -743,7 +745,7 @@ Whole numbers without fractional part.
   float g_force = 9.8f;
   ```
 
-#### 5.3.2 **Floating Point Literal**
+#### 5.4.2 **Floating Point Literal**
 
 The floating point literal can be stored in either decimal or exponent form.
 
@@ -766,7 +768,7 @@ double sin = 1125f;
 double exp = 0.e3;
 ```
 
-#### 5.3.3 **Character Literal**
+#### 5.4.3 **Character Literal**
 
 Single character inside single quotes `' '`
 
@@ -783,7 +785,7 @@ char letter_c = 'c';
 char new_line = '\n';
 ```
 
-#### 5.3.4 **String Literal**
+#### 5.4.4 **String Literal**
 
 A sequence of characters inside double quotes `" "`
 
@@ -794,7 +796,7 @@ char str[] = "Hello";
 // stored as {'H', 'e', 'l', 'l', 'o', '\0'}
 ```
 
-#### 5.3.5 **Boolean Literal (since C99 via <stdbool.h>)**
+#### 5.4.5 **Boolean Literal (since C99 via <stdbool.h>)**
 
 C does not have built-in boolean type in older versions, but since C99 we can use boolean like below
 
