@@ -350,7 +350,7 @@ printf("\nTotal expense: %f", total_expense); // Total expense: 10070680.000000
 
 #### Data types:
 
-##### Basic data types:
+##### Fundamental data types in C:
 
 - `int`: 4 bytes
 
@@ -362,32 +362,69 @@ printf("\nTotal expense: %f", total_expense); // Total expense: 10070680.000000
 
 - `bool`: logically need **1 bit** (physically stored in at least **8 bits** (1 byte) because C standard requires that the size of any object is at least 1 byte = 8 bits).
 
+  Bool introduced in C99, must import `stdbool.h` to use
+
   ```c
+  #include <stdbool.h>
+  
   bool male = true;
-  printf("sizes: %d", sizeof(male)); // sizes: 1
+  printf("sizes: %d byte", sizeof(male)); // sizes: 1 byte
   ```
 
-- `void`: 0 byte
+- `void`: 0 byte, it simply have nothing to store.
 
-C provide several modifications to ***expand*** or ***restrict*** the attributes of fundamental types (adjusting *size*, *range*, *sign* behavior)
+  void data type indicates the absence of a value. Variables of void data type are not allowed. It can only be used for pointers and function return type, and parameters
 
-- `short`: reduces the size and range of an integer (e.g `short int` typically use 2 bytes). Only valid with `int`. `short = short int`, you can use only keyword `short` to present `short int` but remember it ensure the range will not wider than `int`
-- `long`: increases the size and range (e.g., `long int`, `long long int`, `long double`). Usually applied to `int` and `double`. `long = long int` but remember `long` keyword implicitely mean it will ensure range bigger than `int`, you can use only keyword `long` to present `long int`. `long` keyword tell the compiler to make this type wider than plain type (or at least not smaller). It does not guarantee the same size across all platforms. Only valid with `int` or `double`
-- `signed`: allows both negative and positive values (default for most integer types). The first bit from the left represent the sign (**1**: for negative, **0**: for positive). i.e `1000 0000 = -128` the first number `1` means `negative`
-- `unsigned`: restricts values to non-negative, effectively doubling the positive range. The sign bit from above being use to represent value, no need a bit for the sign.
+  ```c
+  void greeting(char *name) {
+    printf("Hello %s. This function return nothing", name);
+  }
+  
+  void dumb_function(void) {
+    printf("\nReceive nothing as a parameter, return nothing");
+  }
+  
+  void dumb_function_two() {
+    printf("\nReceive nothing as a parameter, return nothing");
+  }
+  
+  void *ptr;
+  ```
 
-```c
-int age; // 4 bytes
-short age; // 2 bytes
-short int age; // 2 bytes
-unsigned int age; // 2 bytes
-unsigned short age; // 2 bytes
-long int age; // 8 bytes
-long age; // 8 bytes
-long long int; // 8 bytes
-double age; // 8 bytes
-long double age; // 16 bytes
-```
+##### Modifications in C
+
+C provide several modifications to ***expand*** or ***restrict*** the attributes of fundamental types (adjusting ***size***, ***range***, ***sign*** behavior)
+
+- `short`: reduces the size and range of an integer (e.g `short int` typically use 2 bytes). 
+
+  Only valid with `int`. `short = short int`, you can use only keyword `short` to present `short int` but remember it ensure the range will not wider than `int`
+
+- `long`: increases the size and range (e.g., `long int`, `long long int`, `long double`).
+
+  Usually applied to `int` and `double`. `long = long int` but remember `long` keyword implicitely mean it will ensure range bigger than `int`, you can use only keyword `long` to present `long int`. `long` keyword tell the compiler to make this type wider than plain type (or at least not smaller). It does not guarantee the same size across all platforms. Only valid with `int` or `double`
+
+- `signed`: allows both negative and positive values (default for most integer types).
+
+  The first bit from the left represent the sign (**1**: for negative, **0**: for positive). i.e `1000 0000 = -128` the first number `1` means `negative`
+
+- `unsigned`: restricts values to non-negative, effectively doubling the positive range. 
+
+  The sign bit from above being use to represent value, no need a bit for the sign.
+
+  ```c
+  int age; // 4 bytes
+  short age; // 2 bytes
+  short int age; // 2 bytes
+  unsigned int age; // 2 bytes
+  unsigned short age; // 2 bytes
+  long int age; // 8 bytes
+  long age; // 8 bytes
+  long long int; // 8 bytes
+  double age; // 8 bytes
+  long double age; // 16 bytes
+  ```
+
+  
 
 **Here's the full chain for standard C data types:**
 
@@ -396,24 +433,6 @@ long double age; // 16 bytes
 
 
 **Tips**: to storing currency value in your program, I recommend to use type `long long` (8 bytes signed integer). No floating-rounding errors, percise arithmetic, easy comparison.
-
-
-
-##### Derived data types:
-
-- `array`
-- `pointer`
-- `function`
-
-
-
-##### User defined data types:
-
-- `union`
-- `structure`
-- `enum`
-
-
 
 **Data types sizes and ranges** (based on architectural and following [IEEE-754 floating point standard](https://en.wikipedia.org/wiki/IEEE_754))
 
@@ -427,17 +446,6 @@ long double age; // 16 bytes
 | float           | 4 bytes (32 bits)                           |                                 | Not Applicable       |
 | double          | 8 bytes (64 bits)                           |                                 | Not Applicable       |
 | long double     | typically 16 bytes (x86), 8 or 12 on others |                                 | Not Applicable       |
-
-**Memory allocation of C variables**
-
-When a variable is **declared**, the compiler is told that the variable with the given name and type exists in the program. But no memory is allocated to it yet. Memory is allocated when the variable is **defined**.
-
-The size of memory assigned for variables depends on the type of variable. We can check the size using `sizeof` keyword
-
-```c
-int age;
-printf("sizeof(age) = %d bytes\n", sizeof(age)); // sizeof(age) = 4 bytes
-```
 
 #### 5.2.2 Scope of variable
 
@@ -555,8 +563,6 @@ int main(void) {
   ```
 
   To restrict access to the current file only, global variables can be marked as `static`
-
-
 
 #### 5.2.3 Constant variables
 
@@ -808,11 +814,25 @@ Understanding C memory model is essential for effective programming.
 **6.1 Memory layout**
 
 1. **Text segment** (`.text`): This segment contains the machine code, also known as the program's instructions or executable code. It's where the compiler translates your C code into the binary instructions that the CPU can understand. This segment is read-only to prevent accidental modification of instructions.
+
 2. **Data segment**:
-   * Initialized data (`.data`): This segment holds global and static variables that have been explicitly initialized with a value during their declaration.
-   * Uninitialized Data (`.bss`): This segment stores global and static variables that have not been explicitly initialized during their declaration. By convention, these variables are automatically initialized to zero by the operating system when the program starts. The name "Block Started by Symbol" is a legacy from older assemblers. (zeroed at startup)
-3. **Heap**: Dynamic memory allocation. Grow upwards, managed via functions like `malloc`, `calloc`, `realloc` and `free`
-4. **Stack**: Function calls, local variables, function parameters. Grow downwards, managed automatically by the compiler. Each function call creates a new stack frame, once function returns, the stack is being removed.
+   * Initialized data (`.data`): This segment holds **global** and **static** variables that have been explicitly initialized with a value during their declaration.
+
+   * Uninitialized Data (`.bss`): This segment stores global and static variables that **have not** been explicitly initialized during their declaration.
+
+     By convention, these variables are automatically initialized to zero by the operating system when the program starts.
+
+     The name "**B**lock **S**tarted by **S**ymbol" is a legacy from older assemblers. (zeroed at startup)
+
+3. **Heap**: Dynamic memory allocation.
+
+   Grow upwards, managed via functions like `malloc`, `calloc`, `realloc` and `free`
+
+4. **Stack**: Function calls, local variables, function parameters.
+
+   Grow downwards, managed automatically by the compiler.
+
+   Each function call creates a new stack frame, once function returns, the stack is being removed.
 
 **Memory layout visualization**
 
