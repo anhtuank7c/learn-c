@@ -56,7 +56,7 @@ These rules are then implemented by a software that converts your C code to code
 
 A compiler checks whether the given code is according to the rules or standard. If it is not, it does not convert your code and shows error.
 
-There is also not a single C compiler, but many of them are available for C such as GCC (GNU Compiler Collection), MSVC (Microsoft Visual C++), Clang, Oracle C, etc...
+There is also not a single C compiler, but many of them are available for C such as GCC (GNU Compiler Collection, an Open Source and well known as the most popular C compiler), MSVC (Microsoft Visual C++), Clang, Oracle C, etc...
 
 There are several common C standard you might heard are: [ANSI C, C89, C99, C11, C17, C23](https://en.wikipedia.org/wiki/ANSI_C)
 
