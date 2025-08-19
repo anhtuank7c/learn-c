@@ -813,9 +813,10 @@ Understanding C memory model is essential for effective programming.
 
 **6.1 Memory layout**
 
-1. **Text segment** (`.text`): This segment contains the machine code, also known as the program's instructions or executable code. It's where the compiler translates your C code into the binary instructions that the CPU can understand. This segment is read-only to prevent accidental modification of instructions.
+1. **Text segment** (`.text`): This segment contains the machine code, also known as the program's instructions or executable code. It's where the compiler translates your C code into the binary instructions that the CPU can understand. This segment is **read-only** to prevent accidental modification of instructions.
 
 2. **Data segment**:
+
    * Initialized data (`.data`): This segment holds **global** and **static** variables that have been explicitly initialized with a value during their declaration.
 
    * Uninitialized Data (`.bss`): This segment stores global and static variables that **have not** been explicitly initialized during their declaration.
@@ -870,16 +871,40 @@ int main() {
 
 1. Program begins at `main()`
 
-2. Function calls push data onto the Stack
+   Every C program begin execution from the `main()` function.
 
-3. When a function returns, its stack frame is removed
+2. Top to bottom execution
 
-4. Program continues execution at return point
+   Statement inside functions run sequentially unless control flow changes (`if`, `while`, `for`, `goto`)
 
-5. Program terminates when `main()` returns
+3. Function calls => stack frames
+
+   Each function call creates a stack frame:
+
+   - Function parameters
+   - Local variables
+   - Return address
+
+   When the function returns, its stack frame is destroyed, and execution continues where it left off.
+
+4. Memory usage during execution
+
+   Global/Static variables => stored in `.data`/`.bss` segment
+
+   Local variables => stored in Stack
+
+   Dynamically allocation memory => stored in Heap
+
+   Executable instructions (functions) => stored in text segment
+
+5. Program termination
+
+   When `main()` returns (or `exist()` is called), the OS reclaims resources (stack, heap, ext...)
 
 ## 7. Debugging Basics
 
 Debugging is a critical skill for C development.
 
-**7.1 GDB (GNU Debugger)**
+### **7.1 GDB (GNU Debugger)**
+
+### 7.2 Built-in Debugger function in Clion
