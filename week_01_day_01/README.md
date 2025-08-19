@@ -2,11 +2,9 @@
 
 ## 1. Introduction
 
-C is general-purpose, procedural programming language developed in the early 1970s by [*Dennis Ritchie*](https://en.wikipedia.org/wiki/Dennis_Ritchie) at [**Bell Labs**](https://en.wikipedia.org/wiki/Bell_Labs).
+C programming language is one of earliest high-level languages developed in 1972 by [*Dennis Ritchie*](https://en.wikipedia.org/wiki/Dennis_Ritchie) at [**Bell Labs**](https://en.wikipedia.org/wiki/Bell_Labs).
 
-It's known for its efficiency, control and flexibility.
-
-Despite being nearly 50 years old, C remains one of the most influential and widely used programming language in the world.
+Initially developed as a system programming language, it still remains one of the most popular programming languages used for low level programming, system software, embedded system kernel etc...
 
 **Key characteristics of C:**
 
@@ -22,8 +20,8 @@ Despite being nearly 50 years old, C remains one of the most influential and wid
 * Embedded systems and IoT devices
 * Performance-critical applications
 * System-level programming
-* Foundation for others languages (C++ Objective-C, Javascript, Java)
-* Database engines and network servers
+* Foundation for others languages (C++, Objective-C, Javascript, Java)
+* Database engines (MySQL, Oracle) and network servers
 
 ### Pros and cons of C
 
@@ -37,18 +35,36 @@ Despite being nearly 50 years old, C remains one of the most influential and wid
 **Cons**
 
 - Difficult: especially for beginners due it its complex syntax and low-level access to system resources
-- Lack of memory management: C does not provide automatic memory management which can lead to memory leaks and other memory related bugs if not handled properly 
+- Lack of memory management: C does not provide automatic memory management which can lead to memory leaks and other memory related bugs if not handled properly.
 - No built-in support for OOP: C is procedural programming language so it is not designed to write OOP applications.
-- No built-in support for concurrency: it more difficult to write multithreaded applications compared to languages like Java or Go
+- No built-in support for concurrency: it more difficult to write multithreaded applications compared to languages like Java or Go, Kotlin
 - Security vulnerabilities: C programs are prone to security vulnerabilities, such as buffer overflows, if not written carefully. (You need to maintain memory carefully)
 
 Overall C is a powerfull language with many advantages, but also requires a high degree of expertise to use effectively and has some potential drawbacks, especially for beginners or developers working on complex projects.
 
 >  Manage memory manually is hard but not impossible, I can do it so you can also do it. Just need to follow an effective strategy. Everything will be alright, don't worries.
 
-## 2. Setting up a professional Development Environment
+### C standards and Implementations
 
-> This course is designed for experienced developers so I considered you are familiar with these tools.
+C standards are the set of rules which define the features, syntax, meaning of code, or one can say the grammar of C language.
+
+These standards ensure compatibility and portability of C programs access different compilers and platforms.
+
+Standards are generally provided in the form of a document by the standardization committee.
+
+These rules are then implemented by a software that converts your C code to code executable by your computer. This software is called a **compiler**.
+
+A compiler checks whether the given code is according to the rules or standard. If it is not, it does not convert your code and shows error.
+
+There is also not a single C compiler, but many of them are available for C such as GCC (GNU Compiler Collection), MSVC (Microsoft Visual C++), Clang, Oracle C, etc...
+
+There are several common C standard you might heard are: [ANSI C, C89, C99, C11, C17, C23](https://en.wikipedia.org/wiki/ANSI_C)
+
+Different compilers were also created according to these standards.
+
+## 2. Setting up Development Environment
+
+> This course is designed for experienced developers so I assume you are familiar with these tools.
 
 **2.1 Compiler options:**
 
@@ -186,8 +202,6 @@ gcc helloworld.c -o helloworld
 * `-g`: Include debugging information
 * `-00` though `-03`: Optimize levels from low to high 
 * `--std=c99`or `--std=c11`: Specify C language standard
-
-There are several common C standard you might heard are: [ANSI C, C89, C99, C11, C17, C23](https://en.wikipedia.org/wiki/ANSI_C)
 
 > If you have `gcc version 11+` installed on your computer, default C standard would be C17 + GNU extension. Command to check: `gcc -dM -E - < /dev/null | grep __STDC_VERSION__`
 
