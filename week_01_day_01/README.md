@@ -939,13 +939,51 @@ Implicit conversion, also known as type promotion, occurs when the compiler auto
 
 ```c
 // Example of downward conversion
+// This will loose some information because of
+// the limitation of data range based on data type
+
 float x = 99.9;
 int y = x; // 99;
 bool z = y; // 1;
 
+
+// Example of upward conversion
+// This won't loose any information
+short age1 = 10; // 10
+int age2 = age1; // 10
+long age3 = age2; // 10
+long long age4 = age3; // 10
+float age5 = age4; // 10.000000
+double age6 = age5; // 10.000000
+long double age7 = age6; // 10.000000
+
+char a = 'B'; // B character converted to ASCII value 66
+double b = 10.5;
+double c = a + b; // compiler will automatically converting the result of a and b to double
+printf("%g", c); // 66 + 10.5 = 76.5
 ```
 
+**Always follow this rules while converting data type:**
 
+```c
+bool -> char -> short int -> int -> unsigned int -> long -> unsigned -> long long -> float -> double -> long double
+```
+
+#### 6.2 Explicit
+
+Explicit conversion or typecasting is done explicitly by the programmer according to the requirement.
+
+**Syntax**: `(type) expression`
+
+```c
+float salaray = 99.999;
+int expense = 22;
+double total = (double) salaray - expense; // explicitly casting result to double
+printf("total = %g\n", total);
+
+float c = 99.99;
+double d = (double) c; // explicitly casting float to double
+```
 
 ## 7. Memory model and Execution flow
 
