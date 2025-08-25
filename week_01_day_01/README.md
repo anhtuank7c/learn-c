@@ -156,7 +156,7 @@ There are 4 main phases in compilation process. Understand this is crucial for e
 **4.1 Preprocessing**
 
 * Removal of comments
-* Expansion of macros
+* Expansion of macros such as `#define PI 3.1415`
 * Expansion of includes header files
 * Conditional compilation directives
 
@@ -544,18 +544,35 @@ C provide several modifications to ***expand*** or ***restrict*** the attributes
 
 **Data types sizes and ranges** (based on architectural and following [IEEE-754 floating point standard](https://en.wikipedia.org/wiki/IEEE_754))
 
-| Type            | Size                                        | Value Range Signed              | Value Range Unsigned |
-| --------------- | ------------------------------------------- | ------------------------------- | -------------------- |
-| char            | 1 byte (8 bits)                             | -128 to 127                     | 0 to 255             |
-| short/short int | 2 bytes (16 bits)                           | -32,768 to 32,767               | 0 to 65,535          |
-| int             | 4 bytes (32 bits)                           | -2,147,483,648 to 2,147,483,647 | 0 to 4,294,967,295   |
-| long            | 4 bytes (32 bits) / 8 bytes (64 bits)       |                                 |                      |
-| long long       | 8 bytes (64 bits)                           |                                 |                      |
-| float           | 4 bytes (32 bits)                           |                                 | Not Applicable       |
-| double          | 8 bytes (64 bits)                           |                                 | Not Applicable       |
-| long double     | typically 16 bytes (x86), 8 or 12 on others |                                 | Not Applicable       |
+| Type                        | Size                                        | Value Range Signed              | Value Range Unsigned |
+| --------------------------- | ------------------------------------------- | ------------------------------- | -------------------- |
+| char                        | 1 byte (8 bits)                             | -128 to 127                     | 0 to 255             |
+| short int (`short`)         | 2 bytes (16 bits)                           | -32,768 to 32,767               | 0 to 65,535          |
+| int                         | 4 bytes (32 bits)                           | -2,147,483,648 to 2,147,483,647 | 0 to 4,294,967,295   |
+| long int (`long`)           | 8 bytes (64 bits)                           |                                 |                      |
+| long long int (`long long`) | 8 bytes (64 bits)                           |                                 |                      |
+| float                       | 4 bytes (32 bits)                           |                                 | Not Applicable       |
+| double                      | 8 bytes (64 bits)                           |                                 | Not Applicable       |
+| long double                 | typically 16 bytes (x86), 8 or 12 on others |                                 | Not Applicable       |
 
-#### 5.3.2 Scope of variable
+**Check variable size**
+
+Use `sizeof(param)` method to calculate variables sizes in byte.
+
+```c
+int age = 10;
+sizeof(age); // 4 bytes
+
+long salary = 1000.012;
+sizeof(salary); // 8 bytes
+
+char letter_A = 'A';
+sizeof(letter_A); // 1 byte
+```
+
+
+
+#### 5.3.2 Scope of variables
 
 In C, **scope** defines the part of the program where a variable is accessible. It determines the variable’s lifetime and visibility. There are mainly 2 types of scope:
 
@@ -567,6 +584,7 @@ The local scope refers to the region inside a block or a function. It is the spa
 - Local variables are visible in the block they are declared in and other blocks nested inside that block
 - Local scope is also called **block scope**
 - Local variables have no linkage
+- Stored in the Stack
 
 ```c
 #include <stdio.h>
@@ -606,7 +624,25 @@ int main(void) {
 
 - Global variables are visible in every part of the program
 
-- Global is also called **File scope** as the scope of an identifier starts at the beginning of the file and ends at the end of the file.
+- Global variables types number (int, long, short, double, float) if don't have initial value, it will assigned to `0`
+
+  ```c
+  #include <stdio.h>
+  
+  int age;
+  long salary;
+  float expense;
+  
+  int main(void) {
+    printf("Age: %d, Salary: %f, Expense: %f", age, salary, expense);
+    // Age: 0, Salary: 0.000000, Expense: 0.000000
+    return 0;
+  }
+  ```
+
+  
+
+- **Global scope** is also called **File scope** as the scope of an identifier starts at the beginning of the file and ends at the end of the file.
 
   ```c
   // global scope
@@ -684,15 +720,76 @@ PI = 9.8; // ERROR, cannot reassign value to a constant variable
 
 - A `const` variable **must be initialized at the time of declaration** (otherwise it will have an undefined value that cannot be changed later).
 
-- By convention, constants are often written in **UPPER_CASE** to emphasize that they should/could not be modified, e.g., `PI`, `MAX_SIZE`.
+- By convention (not forced but usually), constants are often written in **UPPER_CASE** to emphasize that it could not being modify, e.g., `PI`, `MAX_SIZE`, `G_FORCE`.
 
-### 5.4 Literals
+### 5.4 Static variables
+
+Static variables in C is a special variable that have these specifics:
+
+* initialized only once
+* Stored in the data segment
+* Exists throughout the program execution
+* local to the function or block
+* Like global variables (default value is 0 if not initialize explicitly)
+
+**Local static variables**
+
+```c
+#include <stdio.h>
+
+void trigger_count() {
+    static int count;
+    printf("\ncount = %d", count);
+    count++;
+}
+
+int main(void) {
+    trigger_count(); // count = 0
+    trigger_count(); // count = 1
+    trigger_count(); // count = 2
+    return 0;
+}
+
+```
+
+**Global static variables**
+
+A global static variable limit external access, it means that they cannot be accessed outside the current source file.
+
+```c
+// mylib.c
+static int age;
+
+
+// main.c
+#include <stdio.h>
+
+static int count; 
+
+void print_count() {
+    printf("\ncount = %d", count);
+}
+
+int main(void) {
+    print_count();
+    count++;
+    print_count();
+    count = 20;
+    print_count();
+	  printf("\nage = %d", age); // error, cannot access static variable from mylib.c
+    return 0;
+}
+```
+
+
+
+### 5.5 Literals
 
 In C, literals are the constant values that are assigned to the variables. Literals represent fixed values that cannot be modified. Literals contain memory but they do not have references as variables. Generally, both terms, constants and literrals are used interchangeably.
 
 There are 5 types of literals in C:
 
-#### 5.4.1 **Integer Literal**
+#### 5.5.1 **Integer Literal**
 
 Whole numbers without fractional part.
 
@@ -763,7 +860,7 @@ Whole numbers without fractional part.
   float g_force = 9.8f;
   ```
 
-#### 5.4.2 **Floating Point Literal**
+#### 5.5.2 **Floating Point Literal**
 
 The floating point literal can be stored in either decimal or exponent form.
 
@@ -786,7 +883,7 @@ double sin = 1125f;
 double exp = 0.e3;
 ```
 
-#### 5.4.3 **Character Literal**
+#### 5.5.3 **Character Literal**
 
 Single character inside single quotes `' '`
 
@@ -803,7 +900,7 @@ char letter_c = 'c';
 char new_line = '\n';
 ```
 
-#### 5.4.4 **String Literal**
+#### 5.5.4 **String Literal**
 
 A sequence of characters inside double quotes `" "`
 
@@ -814,7 +911,7 @@ char str[] = "Hello";
 // stored as {'H', 'e', 'l', 'l', 'o', '\0'}
 ```
 
-#### 5.4.5 **Boolean Literal (since C99 via <stdbool.h>)**
+#### 5.5.5 **Boolean Literal (since C99 via <stdbool.h>)**
 
 C does not have built-in boolean type in older versions, but since C99 we can use boolean like below
 
@@ -827,7 +924,30 @@ bool is_false = false;
 
 
 
-## 6. Memory model and Execution flow
+### 6. Type conversion
+
+Type conversion or type casting is the process of changing one data type from one to another.
+
+This process can be 2 types:
+
+* **Implicit** (Done by the compiler)
+* **Explicit** (Done by the programmer)
+
+#### 6.1 Implicit
+
+Implicit conversion, also known as type promotion, occurs when the compiler automatically converts a smaller or lower data type to a larger or higher one during operation. This ensures no less of information (except when explicitly started), but when converting larger data type to smaller, it can cause loss of information.
+
+```c
+// Example of downward conversion
+float x = 99.9;
+int y = x; // 99;
+bool z = y; // 1;
+
+```
+
+
+
+## 7. Memory model and Execution flow
 
 Understanding C memory model is essential for effective programming.
 
