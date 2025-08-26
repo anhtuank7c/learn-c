@@ -1085,4 +1085,72 @@ Debugging is a critical skill for C development.
 
 ### **7.1 GDB (GNU Debugger)**
 
+* Step 1: Compile with debugging symbols
+
+  ```c
+  gcc - g main.c -o main
+  ```
+
+  `-g` => adds debugging info (line numbers, variable names)
+
+  Without `-g`, GDB will show assembly instead of C code
+
+* Step 2: Start GDB
+
+  ```c
+  gdb ./main
+  ```
+
+* Step 3: Common GDB commands
+
+  * Run: `run`
+
+  * Set a breakpoint:
+
+    ```c
+    break main // break at start of main
+    break 25 // break at line 25
+    break func_name // break at a function
+    ```
+
+  * List code: `list` Show source code near current line
+
+  * Step through:
+
+    ```c
+    step // step into function
+    next // step over (don't enter function)
+    continue // contiune until next breakpoint
+    ```
+
+  * Inspect variables
+
+    ```c
+    print var
+    print *ptr
+    display var // always show var after every step
+    ```
+
+  * Check backtrace (stack trace): `backtrace`
+
+  * Watch variables: `watch var`
+
+  * Exit: `quit`
+
+  **Example:**
+
+  ```bash
+  gdb ./main
+  (gdb) break main
+  (gdb) run
+  (gdb) next
+  (gdb) print x
+  (gdb) continue
+  (gdb) quit
+  ```
+
+  
+
 ### 7.2 Built-in Debugger function in Clion
+
+Read details document at https://www.jetbrains.com/help/clion/debugging-code.html
