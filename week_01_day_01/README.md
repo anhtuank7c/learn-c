@@ -151,7 +151,7 @@ pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-gdb mingw-w64-x86_64-cmake
 
 ## 4. The compilation process
 
-![Compilation process](/Users/mac/projects/learn-c/week_01_day_01/compilation_process.png)
+![Compilation process](./compilation_process.png)
 
 There are 4 main phases in compilation process. Understand this is crucial for effective C programming
 
