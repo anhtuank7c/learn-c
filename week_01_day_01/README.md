@@ -151,6 +151,8 @@ pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-gdb mingw-w64-x86_64-cmake
 
 ## 4. The compilation process
 
+![Compilation process](/Users/mac/projects/learn-c/week_01_day_01/compilation_process.png)
+
 There are 4 main phases in compilation process. Understand this is crucial for effective C programming
 
 **4.1 Preprocessing**
@@ -1162,5 +1164,5 @@ Follow this guidelines: https://lldb.llvm.org/use/map.html#execution-commands
 
 Follow this guidelines https://www.jetbrains.com/help/clion/debugging-code.html
 
-### 7.4 Debugging best practices 
+
 
