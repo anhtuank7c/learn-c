@@ -1085,6 +1085,8 @@ Debugging is a critical skill for C development.
 
 ### **7.1 GDB (GNU Debugger)**
 
+**GDB is widely available on Windows and Linux. If you're using MacOS, Go to 7.2**
+
 * Step 1: Compile with debugging symbols
 
   ```c
@@ -1149,8 +1151,16 @@ Debugging is a critical skill for C development.
   (gdb) quit
   ```
 
-  
+### 7.2 LLDB
 
-### 7.2 Built-in Debugger function in Clion
+On **Mac with Apple Silicon (M1/M2/M3)**, **GDB is not natively supported anymore** (because of SIP – System Integrity Protection – and Apple’s code-signing restrictions).
+Instead, the recommended debugger is **LLDB**, which comes bundled with Xcode.
 
-Read details document at https://www.jetbrains.com/help/clion/debugging-code.html
+Follow this guidelines: https://lldb.llvm.org/use/map.html#execution-commands
+
+### 7.3 Built-in Debugger function in Clion
+
+Follow this guidelines https://www.jetbrains.com/help/clion/debugging-code.html
+
+### 7.4 Debugging best practices 
+
