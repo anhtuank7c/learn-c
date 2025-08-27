@@ -151,7 +151,7 @@ pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-gdb mingw-w64-x86_64-cmake
 
 ## 4. The compilation process
 
-![Compilation process](./compilation_process.png)
+![Compilation process](./compilation_process_overview.png)
 
 There are 4 main phases in compilation process. Understand this is crucial for effective C programming
 
@@ -1017,7 +1017,7 @@ Understanding C memory model is essential for effective programming.
 
 **Memory layout visualization**
 
-![Memory layout visualization](./memory_layout.jpg)
+![Memory layout visualization](./memory_layout.png)
 
 To have better understanding of memory layout, take a look at code from below:
 
