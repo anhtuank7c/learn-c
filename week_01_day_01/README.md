@@ -1081,6 +1081,8 @@ int main() {
 
    When `main()` returns (or `exist()` is called), the OS reclaims resources (stack, heap, ext...)
 
+![Execution flow](./execution_flow.png)
+
 ## 7. Debugging Basics
 
 Debugging is a critical skill for C development.
