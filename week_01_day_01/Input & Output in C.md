@@ -406,3 +406,36 @@ printf("%5d\n", x);   //  123
 printf("%05d\n", -x); //-0123
 ```
 
+## 10. Buffering example in C
+
+Buffering plays a significant role in how input and output operations are handled in C programming. Buffering refers to the temporary storage of input/output data in a buffer (a memory region) before being processed.
+
+When a user input, it is first stored in the buffer before the program reads it.
+
+```c
+#include <stdio.h>
+int main(void) {
+  int x, y;
+  printf("Enter X and Y (integer): ");
+  scanf("%d %d", &x, &y); // You enter 10 20 and then press Enter key. These number are being buffered
+  
+  printf("Multiplication is %d", x * y);
+  // The program immediately process the first number (10)
+  // and moves to the next step.
+  // However, since the second number (20) is already in the buffer
+  // the program skips waiting for further input
+  // and directly computes the result
+
+  return 0;
+}
+```
+
+## 11. Escape sequence
+
+Escape sequences are special characters in C programming that start with a backslash (\) followed by a character or a combination of characters. These sequences allow us to represent certain special characters that are difficult to represent by normal means.
+
+```c
+printf("Hi \"anhtuank7c\".\nWelcome aboard C programming for experienced developer.");
+printf("Path: C:\\project\\c\\day_01.md");
+```
+
