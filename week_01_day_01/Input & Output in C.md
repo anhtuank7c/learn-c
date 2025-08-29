@@ -355,3 +355,54 @@ printf("%*.*s", 5, 3, x); //  anh
 printf("%-5.3s", x); //anh
 ```
 
+**For Floating point number**
+
+Precision determines the number of digits after the decimal point.
+
+* If the number of digits exceeds the specified precision, rounding occurs.
+
+`%f` Prints the number in fixed point notation
+
+```c
+double x = 1.345;
+printf("%.2f", x); //1.234
+printf("%5.2f", x); // 1.234
+printf("%-5.2f", x); //1.34
+printf("%*.*f", 5, 2, x); // 1.34
+printf("%0*.*f", 5, 2, x); //01.34
+```
+
+`%e` prints the number in exponential notation with precision specifying the digits after the decimal
+
+```c
+double x = 1.345;
+printf("%.2e", x); //1.34e+00
+printf("%5.2e", x); //1.34e+00
+printf("%-5.2e", x); //1.34e+00
+printf("%*.*e", 5, 2, x); //1.34e+00
+printf("%0*.*e", 5, 2, x); //1.34e+00
+```
+
+`%g` choose between fixed point or exponential form based on the value, with precision determining the significant digits.
+
+```c
+double x = 1.345;
+printf("%.2e", x); //1.3
+printf("%5.2e", x); //  1.3
+printf("%-5.2e", x); //1.3
+printf("%*.*e", 5, 2, x); //  1.3
+printf("%0*.*e", 5, 2, x); //001.3
+```
+
+**For Integers**
+
+Precision specifies the minimum number of digits to be printed. It basically has same meaning as width in this case except that it adds `0` in the beginning and does not consider the `-` sign as character.
+
+```c
+const int x = 123;
+printf("%.5d\n", x);  //00123
+printf("%.5d\n", -x); //-00123
+printf("%5d\n", x);   //  123 
+printf("%05d\n", -x); //-0123
+```
+
