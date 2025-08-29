@@ -52,7 +52,14 @@ scanf("%d+%d", &a, &b);
 printf("%d + %d = %d", a, b, a + b);
 ```
 
+`scanf` returns the number of successfully read inputs.
 
+```c
+int a = 10, b = 20, c;
+c = scanf("%d %d", &a, &b); // user enter 30 40
+printf("%d %d %d", a, b, c); // 30 40 2
+// since 2 integers (30 & 40) are entered, a = 30, b = 40, and c = 2. so the output is "30 40 2"
+```
 
 ### 3.2 printf
 
