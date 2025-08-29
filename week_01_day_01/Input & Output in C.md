@@ -255,3 +255,103 @@ int main()
 }
 ```
 
+## 9. Width & Precision in printf
+
+When formatting output using the `printf` function, width and precision are two important fields that allow us to control how the output is displayed on the screen
+
+`printf("%width.precision", args...);`
+
+### 9.1 Width field
+
+The width field specifies the minimum number of characters to be printed. If the outpit is smaller than the specified width, spaces or padding characters are added. The behaviour of width specifier depends on the type of data it is working on.
+
+* Default behaviour:
+
+  Without specifying width, the output is printed as it is
+
+* Width with Integer:
+
+  It specifies the minimum number of characters to be printed
+
+  * If the number has fewer digits than the specified width, spaces (or zero if using `0` flag) are added to the left by default
+  * Negative sign `-` is counted as a character for width
+
+* Width with String:
+
+  It specifies the minimum number of characters for the string
+
+  * If the string length is less than the width, spaces are added to the left by default
+  * If the string length exceeds the width, the entire string is printed without truncation
+
+* Width with floating point numbers
+
+  Specifies the minimum number of characters for the entire floating point value (including the decimal point and digits after it)
+
+  - If the value is shorter than the width, spaces (or zeros if using `0` flag) are added
+
+* Dynamic Width
+
+  We can use a `*` symbol to specify the width dynamically as a parameter to `printf`
+
+```c
+#include <stdio.h>
+int main()
+{
+    int x = 124;
+    printf("%d \n", x);     //124
+    printf("%5d \n", x);    //  124
+    char y[] = "gfg";
+    printf("%5s \n", y);    //  gfg
+    float z = 1.2;
+    printf("%5g \n", z);    //  1.2
+    printf("%*s \n", 6, y); //   gfg
+
+    return 0;
+}
+```
+
+**Flags with Width**
+
+Flags are provided with width to modify its normal behaviour. There are two flags for width specifier:
+
+* `-` (Left align): Aligns output to the left
+* `0` (Zero padding): Pads with zeros instead of spaces (for numeric values)
+* `+` (Positive sign): Prints positive sign for positive values
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int x = 124;
+    char y[] = "gfg";
+    float z = 1.2;
+    printf("%-5d %-5s %f\n", x, y, z); //124   gfg   1.200000
+    printf("%05d\n", x);							 //00124
+    printf("%+5d\n", x);							 // +124
+
+    return 0;
+}
+```
+
+### 9.2 Precision field
+
+The precision field is primarily used for floating-point numbers and strings. It controls the number of characters or decimal places to be printed. Like width, it can be dynamic and can be used along with precision.
+
+The behaviour of precision specifier also depends on the type of data it is working on.
+
+**For Strings**
+
+Precision specifies the maximum number of characters to be printed
+
+* If the string has more characters than the precision, it is truncated
+* If the string has fewer characters, no truncation occurs
+
+```c
+char x[] = "anhtuank7c";
+printf("%.3s", x); //anh
+printf("%5.3s", x); //  anh
+printf("%*.*s", 5, 3, x); //  anh
+printf("%-5.3s", x); //anh
+```
+
