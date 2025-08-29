@@ -66,7 +66,12 @@ char name[] = "Sandeep";
 printf("Hi %s,\nYour info:\nAge: %d, Height: %d, Weight: %d", name, age, height, weight);
 ```
 
+printf return the length of string that being printed.
 
+```c
+int total_length = printf("anhtuank7c");
+printf("%d", total_length); // 10
+```
 
 ### 3.3 fgets
 
