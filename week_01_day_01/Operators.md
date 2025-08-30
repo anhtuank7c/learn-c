@@ -335,3 +335,68 @@ printf("%d %d", result, x); // 1 5
 // so x++ will be ignored
 ```
 
+## 5. Bitwise operators
+
+Bitwise operators work on the binary representation of integers, operating bit by bit to perform logical operations.
+
+These operators are incredibly faster than arithmetic and other operators.
+
+There are a total 6 bitwise operators in C.
+
+### 5.1 Bitwise AND (`&`)
+
+Bitwise `AND` operator takes two numbers as operands and does `AND` on every bit of two numbers.
+
+The result of `AND` is `1` only if both bits are 1, otherwise the result is `0`
+
+```c
+int x = 3, y = 6;
+int result = x & y; // 2
+
+// 0011 & 0110 = 0010 (2 in decimal)
+```
+
+| Operand | Binary  | Operator     |
+| ------- | ------- | ------------ |
+| 3       | 0 0 1 1 | &            |
+| 6       | 0 1 1 0 |              |
+| Result  | 0 0 1 0 | 2 in decimal |
+
+### 5.2 Bitwise OR (`|`)
+
+Bitwise `OR` operator takes two numbers as operands and does `OR` on every bit of two numbers.
+
+The result of `OR` is `1` if any one of them is `1`
+
+```c
+int x = 3, y = 6;
+int result = x | y;
+
+// 0011 | 0110 = 0111 (7 in decimal)
+```
+
+| Operand | Binary  | Operator     |
+| ------- | ------- | ------------ |
+| 3       | 0 0 1 1 | \|           |
+| 6       | 0 1 1 0 |              |
+| Result  | 0 1 1 1 | 7 in decimal |
+
+### 5.3 Bitwise XOR (`^`)
+
+Bitwise `XOR` operator takes two numbers as operands and does `XOR` on every bit of two numbers.
+
+The result of `XOR` is `1` if two bits are different, otherwise the result is `0`
+
+```c
+int x = 3, y = 6;
+int result = x ^ y;
+
+// 0011 ^ 0110 = 0101 (5 in decimal)
+```
+
+| Operand | Binary  | Operator     |
+| ------- | ------- | ------------ |
+| 3       | 0 0 1 1 | ^            |
+| 6       | 0 1 1 0 |              |
+| Result  | 0 1 0 1 | 5 in decimal |
+
