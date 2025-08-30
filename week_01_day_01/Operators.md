@@ -231,3 +231,107 @@ y *= x; // y = 10, x = 10; 10 * 10 = 100; y = 100;
 y /= x; // y = 100, x = 10; 100 / 10 = 10; y = 10;
 ```
 
+## 4. Logical operators
+
+Logical operators take boolean inputs and produce boolean output.
+
+They're commonly used with comparison operators to form more complex expressions.
+
+Categorized into two parts:
+
+* Unary: we have only one logical operator in this category
+* Binary: we have logical `AND` and `OR` operators in this category
+
+### 4.1 AND operator (`&&`)
+
+The `&&` operator returns true when both conditions are true, otherwise it returns false.
+
+**Truth table**
+
+| Operand 1 | Operand 2 | `&&` |
+| --------- | --------- | ---- |
+| 0         | 0         | 0    |
+| 1         | 0         | 0    |
+| 0         | 1         | 0    |
+| 1         | 1         | 1    |
+
+### 4.2 OR operator (`||`)
+
+The `||` operator returns true even if one (or both) of the conditions are true, otherwise it returns false.
+
+**Truth table**
+
+| Operand 1 | Operand 2 | `||` |
+| --------- | --------- | ---- |
+| 0         | 0         | 0    |
+| 1         | 0         | 1    |
+| 0         | 1         | 1    |
+| 1         | 1         | 1    |
+
+### 4.3 NOT operator (`!`)
+
+The `!` operator returns true if the conditions is not true, otherwise it returns false.
+
+**Truth table**
+
+| Operand | `!`  |
+| ------- | ---- |
+| 0       | 1    |
+| 1       | 0    |
+
+### 4.4 Short-circuiting in Logical Operators
+
+Short-circuiting refers to the behavior of logical operators where evaluation stops as soon as the result is determined. In the case of logical AND, the second expression/condition is not evaluated if the first expression/condition is false. and in logical OR, second expression/condition is not evaluated if the first condition is true.
+
+**Example 1**
+
+```c
+int x = 5;
+bool result = (x > 10 && x++);
+printf("%d %d\n", result, x); // 0 5
+
+// because x is not greater than 10 (false)
+// then x++ will be ignore (not being evaludate since the first condition is false)
+```
+
+**Example 2**
+
+```c
+int x = 5;
+bool result = (x++ && x > 10);
+printf("%d %d\n", result, x); // 0 6
+
+// Step 1:
+// x++ return 5 because this is post-increment
+// then it incremented by 1 so we have 6
+// in binary representation any integer that is not 0 is true
+// so x++ return 5 will be consider as true
+
+// Step 2:
+// since the left operand is true, now evaluate the right operand x > 10
+// x is now 6
+// 6 < 10 so operand x > 10 is false (or 0)
+
+// Step 3:
+// combine with AND operator we have
+// 5 (true) && 0
+
+// so result = 0
+// x incremented to 6
+```
+
+**Example 3**
+
+```c
+int x = 5;
+bool result = (x > 2 || x++);
+printf("%d %d", result, x); // 1 5
+
+// Step 1:
+// x > 2 return true (or 1)
+
+// Step 2:
+// OR operator just need one operand to being true, it will not evaluate the second operand
+// so x++ will be ignored
+```
+
