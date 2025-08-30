@@ -349,6 +349,8 @@ Bitwise `AND` operator takes two numbers as operands and does `AND` on every bit
 
 The result of `AND` is `1` only if both bits are 1, otherwise the result is `0`
 
+**Example 1**
+
 ```c
 int x = 3, y = 6;
 int result = x & y; // 2
@@ -362,11 +364,36 @@ int result = x & y; // 2
 | 6       | 0 1 1 0 |              |
 | Result  | 0 0 1 0 | 2 in decimal |
 
+**Example 2**
+
+Using bitwise `AND` operator to check a number is odd or even.
+
+```c
+#include <stdio.h>
+#include <stdbool.h>
+
+bool is_odd(int input) {
+  return input & 1; // faster than % 2
+}
+
+int main(void) {
+    printf("%d\n", is_odd(1)); // true
+    printf("%d\n", is_odd(2)); // false
+    printf("%d\n", is_odd(3)); // true
+    return 0;
+}
+
+```
+
+
+
 ### 5.2 Bitwise OR (`|`)
 
 Bitwise `OR` operator takes two numbers as operands and does `OR` on every bit of two numbers.
 
 The result of `OR` is `1` if any one of them is `1`
+
+**Example 1**
 
 ```c
 int x = 3, y = 6;
@@ -380,6 +407,36 @@ int result = x | y;
 | 3       | 0 0 1 1 | \|           |
 | 6       | 0 1 1 0 |              |
 | Result  | 0 1 1 1 | 7 in decimal |
+
+**Example 2**
+
+```c
+#include <stdio.h>
+
+#define READ   0x1  // 0001
+#define WRITE  0x2  // 0010
+#define EXEC   0x4  // 0100
+
+int main() {
+    int permissions = 0;
+
+    // Grant read and write
+    permissions |= (READ | WRITE);  
+    printf("Permissions: %d\n", permissions); // 3 (0011)
+
+    // Check if write permission exists
+    if (permissions & WRITE) {
+        printf("Has write access\n");
+    }
+
+    // Remove write permission
+    permissions &= ~WRITE;
+    printf("Permissions after revoke: %d\n", permissions); // 1 (0001)
+}
+
+```
+
+
 
 ### 5.3 Bitwise XOR (`^`)
 
@@ -400,3 +457,62 @@ int result = x ^ y;
 | 6       | 0 1 1 0 |              |
 | Result  | 0 1 0 1 | 5 in decimal |
 
+### 5.4 Bitwise NOT (`~`)
+
+Bitwise `NOT` operator is a unary operator (**perform on one operand**) that inverts all the bits of its single operand. 
+
+It take one operand and do flip every bit of that number. All `0` become `1`, and all `1` become `0`.
+
+* For an unsigned integer `x`, the result of `~x` is equivalent to `2^n - 1 - x`, where `n` is the number of bits in the integer type (e.g., 32 for int on most systems).
+
+* For signed integers, the result depends on the system’s representation (typically two’s complement), but the operation still inverts all bits.
+
+**Example 1**
+
+```c
+int x = 3; // Signed integer
+int result = ~x;
+printf("%d", result); // 4
+
+// 0011 flipped to 0100
+// The first bit is for sign of int (0 mean positive number, 1 mean negative number)
+```
+
+| Operand            | Binary | Operator     |
+| ------------------ | ------ | ------------ |
+| 3                  | 0011   | `~`          |
+| Do flip every bits | 0100   | 4 in decimal |
+
+**Example 2**
+
+```c
+int x = -3; // Signed integer
+int result = ~x;
+printf("%d", result);
+```
+
+| Operand            | Binary | Operator     |
+| ------------------ | ------ | ------------ |
+| -3                 | 1101   | `~`          |
+| Do flip every bits | 0010   | 2 in decimal |
+
+**Example 3**
+
+```c
+unsigned int x = 3;
+int result = ~x;
+printf("%d", result); // -4
+```
+
+| Operand            | Binary (32 bits)                        | Operator      |
+| ------------------ | --------------------------------------- | ------------- |
+| 3                  | 0000 0000 0000 0000 0000 0000 0000 0011 | `~`           |
+| Do flip every bits | 1111 1111 1111 1111 1111 1111 1111 1100 | -4 in decimal |
+
+### 5.5 Bitwise Left Shift (`<<`)
+
+This operator shifts the bits of the left operand to the left by the number of positions specified by the right operand. Empty positions on the right are filled with 0s. This effectively multiplies the number by powers of 2.
+
+### 5.6 Bitwise Right Shift (`>>`)
+
+This operator shifts the bits of the left operand to the right by the number of positions specified by the right operand. Empty positions on the left are filled based on the data type (0s for unsigned integers, and typically the sign bit for signed integers). This effectively divides the number by powers of 2.
