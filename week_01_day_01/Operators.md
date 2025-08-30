@@ -131,5 +131,67 @@ The `--` operator is used to decrement the value of an integer by one.
   // old value of x (10) assigned to z, then x decremented by 1 (result: x = 9)
   ```
 
+## 2. Comparison operators
 
+Comparison operators are fundamental tools used to compare two values. They evaluate expressions and return Boolean value (true/false) which are represented as `1` for true, and `0` for false.
+
+There are 6 comparison operators in C:
+
+### 2.1 Less than (`<`)
+
+```c
+#include <stdbool.h>
+
+const bool is_less_than = 10 < 20; // true
+printf("%d", is_less_than); // 1
+```
+
+### 2.2 Greater than (`>`)
+
+```c
+#include <stdbool.h>
+
+const bool is_less_than = 10 > 20; // false
+printf("%d", is_less_than); // 0
+```
+
+### 2.3 Less than or equal to (`<=`)
+
+```c
+#include <stdbool.h>
+
+const bool is_less_than = 10 <= 20; // true
+const bool is_less_than_equal = 20 <= 20; // true
+printf("%d %d", is_less_than, is_less_than_equal); // 1 1
+```
+
+### 2.4 Greater than or equal to (`>=`)
+
+```c
+#include <stdbool.h>
+
+const bool is_less_than = 10 >= 20; // false
+const bool is_less_than_equal = 20 >= 20; // true
+printf("%d %d", is_less_than, is_less_than_equal); // 0 1
+```
+
+### 2.5 Equal to (`==`)
+
+```c
+#include <stdbool.h>
+
+const bool is_equal = 10 == 20; // false
+const bool is_equal_two = 20 == 20; // true
+printf("%d %d", is_equal, is_equal_two); // 0 1
+```
+
+### 2.6 Not equal to (`!=`)
+
+```c
+#include <stdbool.h>
+
+const bool is_not_equal = 10 != 20; // true
+const bool is_not_equal_two = 20 == 20; // false
+printf("%d %d", is_not_equal, is_not_equal_two); // 1 0
+```
 
