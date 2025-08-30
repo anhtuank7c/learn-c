@@ -68,6 +68,8 @@ Different compilers were also created according to these standards.
 
 **2.1 Compiler options:**
 
+There are plenty of compiler, some popular compiler are listed from below:
+
 * [GCC (GNU Compiler Collection)](https://gcc.gnu.org/): Standard on Linux/macOS
 * [Clang](https://clang.llvm.org/): Modern compiler with excellents error messages
 * [MinGW](https://www.mingw-w64.org/)/[MSYS2](https://www.msys2.org/): GCC for Windows
