@@ -339,7 +339,7 @@ printf("%d %d", result, x); // 1 5
 
 Bitwise operators work on the binary representation of integers, operating bit by bit to perform logical operations.
 
-**These operators are incredibly faster than arithmetic and other operators (5-20x faster) bue to its simplicity as a single CPU instruction**
+**These operators are incredibly faster than arithmetic and other operators (5-20x faster) due to its simplicity as a single CPU instruction**
 
 There are a total 6 bitwise operators in C.
 
