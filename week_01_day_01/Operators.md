@@ -11,7 +11,7 @@ In C, operators can be categorized in following categories:
 * Logical operators: `&&`, `||`, `!`
 * Bitwise operators: `&`, `|`, `^`, `~`, `>>`, `<<`
 * Assignment operators: `=`, `+=`, `-=`, `*=`, etc...
-* Other operators: conditional, comma, sizeof, address, redirection
+* Other operators: conditional (ternary), comma, sizeof, address, redirection
 
 | Name             | Type                              | Operator                        |
 | ---------------- | --------------------------------- | ------------------------------- |
