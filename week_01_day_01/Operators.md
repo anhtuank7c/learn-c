@@ -79,3 +79,57 @@ Division `/` and remainder `%` operations are undefined when the divisor is zero
 
 ### 1.2 Unary operators
 
+Unary arithmetic operators perform operation on a single operand. Among these, the most commonly used operators are postfix `++`, `--` and prefix increment and decrement operators.
+
+**Increment operator (`++`**)
+
+The `++` operator is used to increment the value of an integer by one.
+
+* When placed before the variable name (pre-increment) its value is incremented instantly.
+
+  ```c
+  int x = 10;
+  int y = ++x; // pre-increment
+  printf("x = %d, y = %d\n", x, y); // x = 11, y = 11
+  
+  // value of x incremented instantly from 10 to 11
+  // then assign 11 to y
+  ```
+
+* When placed after the variable name (post-increment) its value is incremented after the evaluation of whole expression
+
+  ```c
+  int x = 10;
+  int z = x++; // post-increment
+  printf("x = %d, z = %d\n", x, z); // x = 11, z = 10
+  
+  // old value of x (10) assigned to z, then x incremented by 1 (result: x = 11)
+  ```
+
+**Decrement operator (`--`**)
+
+The `--` operator is used to decrement the value of an integer by one.
+
+* When placed before the variable name (pre-decrement) its value is decremented instantly
+
+  ```c
+  int x = 10;
+  int y = --x; // pre-decrement
+  printf("x = %d, y = %d\n", x, y); // x = 9, y = 9
+  
+  // value of x decremented instantly from 10 to 9
+  // then assign 9 to y
+  ```
+
+* When placed after the variable name (post-decrement) its value is decremented after the evaluation of whole expression
+
+  ```c
+  int x = 10;
+  int z = x--; // post-decrement
+  printf("x = %d, z = %d\n", x, z); // x = 9, z = 10
+  
+  // old value of x (10) assigned to z, then x decremented by 1 (result: x = 9)
+  ```
+
+
+
