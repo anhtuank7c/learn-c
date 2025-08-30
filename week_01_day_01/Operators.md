@@ -195,3 +195,39 @@ const bool is_not_equal_two = 20 == 20; // false
 printf("%d %d", is_not_equal, is_not_equal_two); // 1 0
 ```
 
+## 3. Assignment operators
+
+Assignment operators are used to assign the value of a variable.
+
+### 3.1 Simple Assignment Operator (`=`)
+
+A simple assigment operator `=` is used to assign the value to a variable
+
+```c
+int x = 10; // assign 10 to x
+int y = -200; // assign -200 to y
+```
+
+### 3.2 Compound Assignment Operators
+
+These operators are used to calculate basic mathematical calculations and assign them to the variable.
+
+They are shorthand notations that improve code readability and reduce redundancy.
+
+* Addition and assign `+=`
+* Subtraction and assign `-=`
+* Multiplication and assign `*=`
+* Division and assign `/=`
+* Remainder and assign `%=`
+
+Example
+
+```c
+int x = 10, y;
+y = x; // y = 10
+y += x; // y = 10, x = 10; 10 + 10 = 20; y = 20;
+y -= x; // y = 10
+y *= x; // y = 10, x = 10; 10 * 10 = 100; y = 100;
+y /= x; // y = 100, x = 10; 100 / 10 = 10; y = 10;
+```
+
