@@ -339,7 +339,7 @@ printf("%d %d", result, x); // 1 5
 
 Bitwise operators work on the binary representation of integers, operating bit by bit to perform logical operations.
 
-These operators are incredibly faster than arithmetic and other operators.
+**These operators are incredibly faster than arithmetic and other operators (5-20x faster) bue to its simplicity as a single CPU instruction**
 
 There are a total 6 bitwise operators in C.
 
@@ -348,6 +348,10 @@ There are a total 6 bitwise operators in C.
 Bitwise `AND` operator takes two numbers as operands and does `AND` on every bit of two numbers.
 
 The result of `AND` is `1` only if both bits are 1, otherwise the result is `0`
+
+* **Analogy**: Like a gate that only opens (`1`) when both keys (operands) are present (`1`)
+* **Mnemonic**: Both must agree (`A` & `B` = 1 only if both are `1`)
+* **Use**: Masking (e.g checking specific flags)
 
 **Example 1**
 
@@ -393,6 +397,10 @@ Bitwise `OR` operator takes two numbers as operands and does `OR` on every bit o
 
 The result of `OR` is `1` if any one of them is `1`
 
+* **Analogy**: Like a light switch where either switch (`A` or `B`) can turn it on (`1`)
+* **Mnemonic**: One or the other (`|` looks like a pipe allowing flow from either side)
+* **Use**: Setting flags
+
 **Example 1**
 
 ```c
@@ -408,41 +416,15 @@ int result = x | y;
 | 6       | 0 1 1 0 |              |
 | Result  | 0 1 1 1 | 7 in decimal |
 
-**Example 2**
-
-```c
-#include <stdio.h>
-
-#define READ   0x1  // 0001
-#define WRITE  0x2  // 0010
-#define EXEC   0x4  // 0100
-
-int main() {
-    int permissions = 0;
-
-    // Grant read and write
-    permissions |= (READ | WRITE);  
-    printf("Permissions: %d\n", permissions); // 3 (0011)
-
-    // Check if write permission exists
-    if (permissions & WRITE) {
-        printf("Has write access\n");
-    }
-
-    // Remove write permission
-    permissions &= ~WRITE;
-    printf("Permissions after revoke: %d\n", permissions); // 1 (0001)
-}
-
-```
-
-
-
 ### 5.3 Bitwise XOR (`^`)
 
 Bitwise `XOR` operator takes two numbers as operands and does `XOR` on every bit of two numbers.
 
 The result of `XOR` is `1` if two bits are different, otherwise the result is `0`
+
+* **Analogy**: Like a toggle switch - flips state if inputs differ
+* **Mnemonic**: X marks the eXclusive spot (`^` looks like an arrow pointing to differents)
+* **Use**: Toggling bits, encryption
 
 ```c
 int x = 3, y = 6;
@@ -461,11 +443,11 @@ int result = x ^ y;
 
 Bitwise `NOT` operator is a unary operator (**perform on one operand**) that inverts all the bits of its single operand. 
 
-It take one operand and do flip every bit of that number. All `0` become `1`, and all `1` become `0`.
+All `0` become `1`, and all `1` become `0`.
 
-* For an unsigned integer `x`, the result of `~x` is equivalent to `2^n - 1 - x`, where `n` is the number of bits in the integer type (e.g., 32 for int on most systems).
-
-* For signed integers, the result depends on the system’s representation (typically two’s complement), but the operation still inverts all bits.
+* **Analogy**: Like flipping a switchboard - every light toggles state
+* **Mnemonic**: Negate everything (`~` looks wavy, like flipping everything)
+* **Use**: Clearing flags, creating masks
 
 **Example 1**
 
@@ -478,10 +460,10 @@ printf("%d", result); // 4
 // The first bit is for sign of int (0 mean positive number, 1 mean negative number)
 ```
 
-| Operand            | Binary | Operator     |
-| ------------------ | ------ | ------------ |
-| 3                  | 0011   | `~`          |
-| Do flip every bits | 0100   | 4 in decimal |
+| Operand           | Binary | Operator     |
+| ----------------- | ------ | ------------ |
+| 3                 | 0011   | `~`          |
+| Invert every bits | 0100   | 4 in decimal |
 
 **Example 2**
 
@@ -491,10 +473,10 @@ int result = ~x;
 printf("%d", result);
 ```
 
-| Operand            | Binary | Operator     |
-| ------------------ | ------ | ------------ |
-| -3                 | 1101   | `~`          |
-| Do flip every bits | 0010   | 2 in decimal |
+| Operand           | Binary | Operator     |
+| ----------------- | ------ | ------------ |
+| -3                | 1101   | `~`          |
+| Invert every bits | 0010   | 2 in decimal |
 
 **Example 3**
 
@@ -504,15 +486,181 @@ int result = ~x;
 printf("%d", result); // -4
 ```
 
-| Operand            | Binary (32 bits)                        | Operator      |
-| ------------------ | --------------------------------------- | ------------- |
-| 3                  | 0000 0000 0000 0000 0000 0000 0000 0011 | `~`           |
-| Do flip every bits | 1111 1111 1111 1111 1111 1111 1111 1100 | -4 in decimal |
+| Operand           | Binary (32 bits)                        | Operator      |
+| ----------------- | --------------------------------------- | ------------- |
+| 3                 | 0000 0000 0000 0000 0000 0000 0000 0011 | `~`           |
+| Invert every bits | 1111 1111 1111 1111 1111 1111 1111 1100 | -4 in decimal |
 
 ### 5.5 Bitwise Left Shift (`<<`)
 
-This operator shifts the bits of the left operand to the left by the number of positions specified by the right operand. Empty positions on the right are filled with 0s. This effectively multiplies the number by powers of 2.
+This operator shifts the bits of the left operand to the left by the number of positions specified by the right operand.
+
+Empty positions on the right are filled with 0s.
+
+This effectively multiplies the number by powers of 2.
+
+* **Analogy**: Like multiplying by powers of 2 (e.g `x << 1` is `x * 2`)
+
+* **Mnemonic**: Launch left (`<<` points left, pushing bits that way)
+* **Use**: Fast multiplication, bit field alignment
+
+**Example 1**
+
+```c
+int x = 3;
+int result = x << 1;
+printf("%d", result); // 6
+```
+
+| Operand                                                      | Binary | Operator     |
+| ------------------------------------------------------------ | ------ | ------------ |
+| 3                                                            | 0011   | `<<`         |
+| Pushing bits to the left, empty position on the right are filled with `0` | 0110   | 6 in decimal |
+
+**Example 2**
+
+```c
+int x = -3;
+int result = x << 1;
+printf("%d", result); // -6
+// -3:                       1111 1111 1111 1111 1111 1111 1111 1101
+// pushing bits to the left: 1111 1111 1111 1111 1111 1111 1111 1010
+
+```
+
+| Operand                                                      | Binary | Operator     |
+| ------------------------------------------------------------ | ------ | ------------ |
+| -3                                                           | 1101   | `<<`         |
+| Pushing bits to the left, empty position on the right are filled with `0` | 1010   | 6 in decimal |
 
 ### 5.6 Bitwise Right Shift (`>>`)
 
-This operator shifts the bits of the left operand to the right by the number of positions specified by the right operand. Empty positions on the left are filled based on the data type (0s for unsigned integers, and typically the sign bit for signed integers). This effectively divides the number by powers of 2.
+This operator shifts the bits of the left operand to the right by the number of positions specified by the right operand.
+
+Empty positions on the left are filled based on the data type (0s for unsigned integers, and typically the sign bit for signed integers).
+
+This effectively divides the number by powers of 2.
+
+* **Analogy**: Like dividing by powers of 2 (e.g `x >> 1` is `x / 2`)
+* **Mnemonic**: Rush right (`>>` points right, moving bits there)
+* **Use**: Fast division, extracting bit fields
+
+**Example 1**
+
+```c
+int x = 3;
+int result = x >> 1;
+printf("%d", result); // 1
+```
+
+| Operand                                                      | Binary | Operator     |
+| ------------------------------------------------------------ | ------ | ------------ |
+| 3                                                            | 0011   | `>>`         |
+| Pushing bits to the right, empty position on the right are filled with `0` | 0001   | 1 in decimal |
+
+**Example 2**
+
+```c
+int x = -3;
+int result = x >> 1;
+printf("%d", result); // -2
+```
+
+| Operand                                                      | Binary | Operator      |
+| ------------------------------------------------------------ | ------ | ------------- |
+| -3                                                           | 1101   | `>>`          |
+| Pushing bits to the right, empty position on the right are filled with `0` | 1110   | -2 in decimal |
+
+
+
+**Complex example of Linux permission**
+
+```c
+#include <stdio.h>
+#include <stdint.h>
+
+// Permission bitmasks (9-bit permissions)
+#define OWNER_READ   (1U << 8) // 400 octal
+#define OWNER_WRITE  (1U << 7) // 200 octal
+#define OWNER_EXEC   (1U << 6) // 100 octal
+
+#define GROUP_READ   (1U << 5) // 040 octal
+#define GROUP_WRITE  (1U << 4) // 020 octal
+#define GROUP_EXEC   (1U << 3) // 010 octal
+
+#define OTHERS_READ  (1U << 2) // 004 octal
+#define OTHERS_WRITE (1U << 1) // 002 octal
+#define OTHERS_EXEC  (1U << 0) // 001 octal
+
+// Prints permissions in rwxrwxrwx format
+void print_permissions(uint16_t perms) {
+    // Owner permissions
+    putchar(perms & OWNER_READ  ? 'r' : '-');
+    putchar(perms & OWNER_WRITE ? 'w' : '-');
+    putchar(perms & OWNER_EXEC  ? 'x' : '-');
+  
+    // Group permissions
+    putchar(perms & GROUP_READ  ? 'r' : '-');
+    putchar(perms & GROUP_WRITE ? 'w' : '-');
+    putchar(perms & GROUP_EXEC  ? 'x' : '-');
+  
+    // Others permissions
+    putchar(perms & OTHERS_READ  ? 'r' : '-');
+    putchar(perms & OTHERS_WRITE ? 'w' : '-');
+    putchar(perms & OTHERS_EXEC  ? 'x' : '-');
+    printf(" (octal: %o)\n", perms & 0777); // Mask to 9 bits
+}
+
+// Grants a permission using OR
+uint16_t grant_permission(uint16_t perms, uint16_t flag) {
+    return perms | flag; // Set specified bit
+}
+
+// Revokes a permission using AND and NOT
+uint16_t revoke_permission(uint16_t perms, uint16_t flag) {
+    return perms & ~flag; // Clear specified bit
+}
+
+// Toggles a permission using XOR
+uint16_t toggle_permission(uint16_t perms, uint16_t flag) {
+    return perms ^ flag; // Flip specified bit
+}
+
+int main(void) {
+    uint16_t perms = 0644; // rw-r--r-- (octal)
+
+    printf("Initial: ");
+    print_permissions(perms);
+
+    // Grant group write permission
+    perms = grant_permission(perms, GROUP_WRITE);
+    printf("After granting group write: ");
+    print_permissions(perms);
+
+    // Revoke others read permission
+    perms = revoke_permission(perms, OTHERS_READ);
+    printf("After revoking others read: ");
+    print_permissions(perms);
+
+    // Toggle owner execute permission
+    perms = toggle_permission(perms, OWNER_EXEC);
+    printf("After toggling owner execute: ");
+    print_permissions(perms);
+
+    // Demonstrate shift for bit alignment (e.g., move owner to group)
+    uint16_t owner_bits = (perms >> 6) & 07; // Extract owner bits
+    printf("Owner bits shifted to group position: %o\n", owner_bits << 3);
+
+    return 0;
+}
+
+/* Result
+
+Initial: rw-r--r-- (octal: 644)
+After granting group write: rw-rw-r-- (octal: 664)
+After revoking others read: rw-rw---- (octal: 660)
+After toggling owner execute: rwxrw---- (octal: 760)
+Owner bits shifted to group position: 70
+*/
+```
+
