@@ -672,3 +672,60 @@ int result = (x > 5) ? 100 : 200;
 // if x > 5 return 100, otherwise return 200
 ```
 
+## 8. Operator precedence & associativity
+
+**Operator Precedence** determines the order in which operators are evaluated in an expression when multiple operators are present. Operators with higher precedence are evaluated first. Use `()` to override precedence, forcing evaluation in the desired order.
+
+**Operator Associativity** determines the order of evaluation when operators have the **same precedence**. It can be:
+
+- **Left-to-right**: Operators are evaluated from left to right (e.g., arithmetic operators like `+`, `-`).
+- **Right-to-left**: Operators are evaluated from right to left (e.g., assignment operators like `=`).
+
+| Precedence | Operator             | Description                                    | Associativity |
+| ---------- | -------------------- | ---------------------------------------------- | ------------- |
+| 1          | `()`                 | Parentheses                                    | Left-to-right |
+| 2          | `!`, `~`, `++`, `--` | Logical NOT, Bitwise NOT, Increment, Decrement | Right-to-left |
+| 3          | `*`, `/`, `%`        | Multiplication, Division, Modulo               | Left-to-right |
+| 4          | `+`, `-`             | Addition, Subtraction                          | Left-to-right |
+| 5          | `<<`, `>>`           | Bitwise Left Shift, Right Shift                | Left-to-right |
+| 6          | `<`, `<=`, `>`, `>=` | Relational operators                           | Left-to-right |
+| 7          | `==`, `!=`           | Equality operators                             | Left-to-right |
+| 8          | `&`                  | Bitwise AND                                    | Left-to-right |
+| 9          | `^`                  | Bitwise XOR                                    | Left-to-right |
+| 10         | `                    | `                                              | Bitwise OR    |
+| 11         | `&&`                 | Logical AND                                    | Left-to-right |
+| 12         | `                    |                                                | `             |
+| 13         | `?:`                 | Ternary operator                               | Right-to-left |
+| 14         | `=`                  | Assignment                                     | Right-to-left |
+| 15         | `,`                  | Comma                                          | Left-to-right |
+
+* **Analogy**: Operator precedence is like a kitchen recipe - some steps (e.g chop ingredients) must happen before others (e.g mix). Associativity is the order you chop multiple ingredients (left to right or right to left)
+* **Mnemonic**: High precedence acts first, same precedence check associativity
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int a = 2, b = 3, c = 4;
+
+    // Precedence: * before +
+    int result1 = a + b * c; // 2 + (3 * 4) = 14
+    printf("a + b * c = %d\n", result1);
+
+    // Parentheses override precedence
+    int result2 = (a + b) * c; // (2 + 3) * 4 = 20
+    printf("(a + b) * c = %d\n", result2);
+
+    // Associativity: = is right-to-left
+    int x, y, z;
+    x = y = z = 5; // z = 5, then y = z, then x = y
+    printf("x = %d, y = %d, z = %d\n", x, y, z);
+
+    // Bitwise: & before |
+    int result3 = a & b | c; // (2 & 3) | 4
+    printf("a & b | c = %d\n", result3); // (2 & 3 = 2) | 4 = 6
+
+    return 0;
+}
+```
+
