@@ -94,3 +94,68 @@ printf("Have dinner\n");
   ```
 
 * Code formating & stype should follow your's organization style standard
+
+## 2. Else if
+
+The **else if statement** is conditional statement used for multiple conditional checks. It contains additional blocks of code for each condition specified in the else if.
+
+**Syntax**
+
+```c
+if (condition) {
+  // do something
+} else if (another_condition) {
+  // do something
+} else {
+  // do something
+}
+```
+
+Example
+
+```c
+int x;
+printf("Enter an integer: ");
+scanf("%d", &x);
+if (x < 10) {
+    printf("%d < 10\n", x);
+} else if (x < 50) {
+    printf("%d < 50\n", x);
+} else if (x < 80) {
+    printf("%d < 80\n", x);
+} else {
+    printf("%d >= 80\n", x);
+}
+```
+
+## 3. Nested if-esle
+
+Nested if-else statements are used when we have a set of conditions to be tested, and each condition has further conditions to be tested. The nested if-else structure allows us to group multiple conditions in a hierarchical way.
+
+Example
+
+```c
+int main(void) {
+    int x;
+    printf("Enter an integer (0-10): ");
+    scanf("%d", &x);
+    if (x < 0 || x > 10) {
+        printf("Invalid input\n");
+        return 1;
+    }
+    if (x < 6) {
+      	// nested
+        if (x < 5) {
+            printf("Too weak\n");
+        } else {
+            printf("Normal strength\n");
+        }
+    } else if (x < 8) {
+        printf("Moderate strength\n");
+    } else {
+        printf("Strong\n");
+    }
+    return 0;
+}
+```
+
