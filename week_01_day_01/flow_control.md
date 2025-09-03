@@ -159,3 +159,58 @@ int main(void) {
 }
 ```
 
+## 4. Switch Statement
+
+The ***\*switch\**** statement in C is a control structure that allows for the execution of a block of code from multiple blocks based on the value of a single variable called control variable. It is an alternative for long if statements.
+
+**Syntax**
+
+```c
+switch (control_variable) {
+  case value_1:
+    // do something
+    break;
+  // union cases
+  case value_2:
+  case value_3:
+    // do something
+    break;
+  default:
+    // do something
+}
+```
+
+Example
+
+```c
+int x;
+printf("Enter an integer (0-10): ");
+scanf("%d", &x);
+switch (x) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+        printf("Too weak\n");
+        break;
+
+    case 6:
+    case 7:
+        printf("Moderate\n");
+        break;
+
+    case 8:
+        printf("Strong\n");
+        break;
+
+    case 9:
+    case 10:
+        printf("Super strong\n");
+        break;
+    default:
+        printf("Wrong input\n");
+}
+```
+
