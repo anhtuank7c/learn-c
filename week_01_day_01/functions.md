@@ -85,6 +85,18 @@ So, it's like telling the compiler:
 
 ***Normal function call***
 
+```
+main()
+   |
+   +--> call function_name()
+             |
+             +--> new stack frame
+             +--> return value
+   <-- return
+```
+
+
+
 1. Push arguments onto the stack (or into registers, depending on calling convention).
 2. Save the return address (so the CPU knows where to come back).
 3. Jump (`call`) to the function body.
@@ -96,6 +108,15 @@ So, it's like telling the compiler:
 That’s the whole **function call overhead**.
 
 With an **inline function** (if the compiler actually inlines it):
+
+```
+main()
+   |
+   +--> directly executes x + y
+   (no extra call, no new frame)
+```
+
+
 
 - The compiler just **copies the function body** into the caller.
 - No `call` / `ret`, no extra **stack frame**.
