@@ -438,7 +438,7 @@ int result = x ^ y;
 
 Bitwise `NOT` operator is a unary operator (**perform on one operand**) that inverts all the bits of its single operand. 
 
-All `0` become `1`, and all `1` become `0`.
+All `0` become `1`, and all `1` become `0`
 
 * **Analogy**: Like flipping a switchboard - every light toggles state
 * **Mnemonic**: Negate everything (`~` looks wavy, like flipping everything)
@@ -449,42 +449,29 @@ All `0` become `1`, and all `1` become `0`.
 ```c
 int x = 3; // Signed integer
 int result = ~x;
-printf("%d", result); // 4
+printf("%d", result); // -4
 
-// 0011 flipped to 0100
+// 00000000000000000000000000000011 flipped to 11111111111111111111111111111100
 // The first bit is for sign of int (0 mean positive number, 1 mean negative number)
 ```
 
-| Operand           | Binary | Operator     |
-| ----------------- | ------ | ------------ |
-| 3                 | 0011   | `~`          |
-| Invert every bits | 0100   | 4 in decimal |
+| Operand           | Binary                           | Operator      |
+| ----------------- | -------------------------------- | ------------- |
+| 3                 | 00000000000000000000000000000011 | `~`           |
+| Invert every bits | 11111111111111111111111111111100 | -4 in decimal |
 
 **Example 2**
 
 ```c
 int x = -3; // Signed integer
 int result = ~x;
-printf("%d", result);
+printf("%d", result); // 2
 ```
 
-| Operand           | Binary | Operator     |
-| ----------------- | ------ | ------------ |
-| -3                | 1101   | `~`          |
-| Invert every bits | 0010   | 2 in decimal |
-
-**Example 3**
-
-```c
-unsigned int x = 3;
-int result = ~x;
-printf("%d", result); // -4
-```
-
-| Operand           | Binary (32 bits)                        | Operator      |
-| ----------------- | --------------------------------------- | ------------- |
-| 3                 | 0000 0000 0000 0000 0000 0000 0000 0011 | `~`           |
-| Invert every bits | 1111 1111 1111 1111 1111 1111 1111 1100 | -4 in decimal |
+| Operand           | Binary                           | Operator     |
+| ----------------- | -------------------------------- | ------------ |
+| -3                | 11111111111111111111111111111101 | `~`          |
+| Invert every bits | 00000000000000000000000000000010 | 2 in decimal |
 
 ### 6.5 Bitwise Left Shift (`<<`)
 
