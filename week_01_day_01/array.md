@@ -109,3 +109,36 @@ int number_of_elements = sizeof(arr)/sizeof(arr[0]);
 printf("%d\n", number_of_elements); // 4 elements
 ```
 
+## 4. Array Traversal
+
+Array traversal is a common operation where we visit each element of an array.
+
+For traversing, we need to know about the size of an array, using size we find what is a valid index range that we traverse the array.
+
+We mainly use two ways to traverse an array:
+
+* **For loop**
+
+  ```c
+  int arr[] = {10, 20, 30, 0};
+  int elements = sizeof(arr)/sizeof(arr[0]);
+  for (int i = 0; i < elements; i++) {
+    printf("%d\n", arr[i]);
+  }
+  ```
+
+  
+
+* **While loop**
+
+  ```c
+  int arr[] = {10, 20, 30, 0};
+  int elements = sizeof(arr)/sizeof(arr[0]);
+  int count = 0;
+  while (count < elements) {
+    printf("%d\n", elements[count]);
+    count++;
+  }
+  ```
+
+  
