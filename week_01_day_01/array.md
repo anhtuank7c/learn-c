@@ -141,4 +141,11 @@ We mainly use two ways to traverse an array:
   }
   ```
 
-  
+## 5. Different types of Array
+
+In C, arrays can be broadly categorized into two types **statically allocated arrays** and **dynamically allocated arrays**.
+
+Both serve different purposes.
+
+### 5.1 Statically Allocated Arrays
+
