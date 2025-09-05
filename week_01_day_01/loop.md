@@ -50,27 +50,7 @@ while (count < 3) {
 */
 ```
 
-## 2. For
-
-Best when you **know how many times** you want to repeat.
-
-**Syntax**
-
-```c
-for (initialization; condition; update) {
-  // loop body
-}
-```
-
-**Example**
-
-```c
-for (int i = 0; i < 5; i++) {
-  printf("%d: Hello world\n", count);
-}
-```
-
-## 3. Do while
+## 2. Do while
 
 Similar to `while`, but **executes at least once** (condition checked *after* the loop body).
 
@@ -93,6 +73,28 @@ do {
   count++;
 } while (count > 5);
 ```
+
+## 3. For
+
+Best when you **know how many times** you want to repeat.
+
+**Syntax**
+
+```c
+for (initialization; condition; update) {
+  // loop body
+}
+```
+
+**Example**
+
+```c
+for (int i = 0; i < 5; i++) {
+  printf("%d: Hello world\n", count);
+}
+```
+
+
 
 ## 4. Special Control Keywords
 
