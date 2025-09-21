@@ -149,3 +149,34 @@ Both serve different purposes.
 
 ### 5.1 Statically Allocated Arrays
 
+In C, statically allocated arrays are most common type of array. These arrays a fixed size, which must be determined at compile time. The creation of these arrays is in the funcion call stack when a function is called and destroyed automatically when the function exists or reads.
+
+Example
+
+```c
+int arr[100];
+char name[100];
+int arr[] = {1, 2, 3, 4, 5};
+```
+
+### 5.2 Dynamically Allocated Arrays
+
+In certain conditions, we want memory to remain available after the function exits. This can be achieved through dynamically allocated arrays.
+
+In Java, we declare the array first without specifying the size of the array but it is not possible in C.
+
+These arrays are created using **pointers**, and the programmer has control over when the memory is allocated and deallocated.
+
+Arrays are allocated in the **heap memory** when you create using **pointers**.
+
+Example
+
+```c
+int *arr[] = (int *) malloc(sizeof(int) *n);
+```
+
+There are two advantages to using dynamic allocated arrays:
+
+- As a program you decide when memory is allocated and deallocated.
+- These arrays are not deleted when function s terminate or exit
+
