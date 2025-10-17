@@ -2,7 +2,11 @@
 
 ## Application of pointer
 
-* Changing passed parameter
+* **Changing passed parameter**:
+
+  By default, parameters passed to function are passed by value. Whatever change is done to them inside the function does not affect the actual variable.
+
+  Pointers are used when the need is to modify the variables inside a function. Languages like C++ and Java support references for such purpose, but C only uses pointers.
 * Passing large object efficiently
 * Dynamic memory allocation
 * Implement data structure like Linked List, Tree, Binary Search, etc...
