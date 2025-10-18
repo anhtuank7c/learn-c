@@ -2,20 +2,39 @@
 
 ## Application of pointer
 
-* **Changing passed parameter**:
+* **Changing passed parameter**
 
-  By default, parameters passed to function are passed by value. Whatever change is done to them inside the function does not affect the actual variable.
+​	By default, parameters passed to function are passed by value. Whatever change is done to them inside the function does 	not affect the actual variable.
 
-  Pointers are used when the need is to modify the variables inside a function. Languages like C++ and Java support references for such purpose, but C only uses pointers.
+​	Pointers are used when the need is to modify the variables inside a function. Languages like C++ and Java support references 	for such purpose, but C only uses pointers.
+
 * **Passing large object efficiently**
 
   In C, passing large objects to functions by value leads to the creation of a copy the entire object into the function's local variables, which is very inefficient. Pointers solve this problem by passing the address of the objects, allowing the function to access it directly without copying.
-* Dynamic memory allocation
-* Implement data structure like Linked List, Tree, Binary Search, etc...
-* To do system level programming
-* To return multiple value
-* Used for accessing array element
-* To pass array parameters
+
+* **Dynamic memory allocation**
+
+  Dynamic memory allocation and dellocation in C allow programmers to allocate memory during runtime and release it when no longer needed. Pointers store the address of dynamically allocated memory.
+
+* **Implement data structure like Linked List, Tree, Binary Search, etc...**
+
+  Data structures like Linked List, trees, and graphs often require nodes that are not stored continuously in memory. Pointers help link these nodes by storing the address of the next nodes thus allows the creation of dynamic and flexible data structures in C.
+
+* **System level programming**
+
+  Pointers play a major role in multi-threading and inter-process communication. They take care of the shared memory blocks in case multiple processes access them.
+
+* **Returning multiple values from Functions**
+
+  C functions typically return a single value. However multiple values can be returned by passing the addresses of the variables to the function and storing it in a pointer.
+
+* **Accessing array element**
+
+  Internally, C uses pointer arithmetic to access elements of arrays. Understanding the relationship between arrays and pointers allows the users to direct access to array elements from anywhere if they have the address.
+
+* **Passing arrays to Functions**
+
+  Passing larges arrays values by value in C is inefficient, as it requires copying the entirely array. Instead, arrays are passed as pointers, where only the address of the first element is passed, allowing functions to work with the original array efficiently.
 
 ## Address and deference Operator in C
 
