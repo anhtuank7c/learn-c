@@ -7,7 +7,9 @@
   By default, parameters passed to function are passed by value. Whatever change is done to them inside the function does not affect the actual variable.
 
   Pointers are used when the need is to modify the variables inside a function. Languages like C++ and Java support references for such purpose, but C only uses pointers.
-* Passing large object efficiently
+* **Passing large object efficiently**
+
+  In C, passing large objects to functions by value leads to the creation of a copy the entire object into the function's local variables, which is very inefficient. Pointers solve this problem by passing the address of the objects, allowing the function to access it directly without copying.
 * Dynamic memory allocation
 * Implement data structure like Linked List, Tree, Binary Search, etc...
 * To do system level programming
