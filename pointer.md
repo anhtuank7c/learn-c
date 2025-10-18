@@ -1,42 +1,42 @@
 # Pointer
 
-## Application of pointer
+## 1. Application of pointer
 
-* **Changing passed parameter**
+### 1.1 **Changing passed parameter**
 
 ​	By default, parameters passed to function are passed by value. Whatever change is done to them inside the function does 	not affect the actual variable.
 
 ​	Pointers are used when the need is to modify the variables inside a function. Languages like C++ and Java support references 	for such purpose, but C only uses pointers.
 
-* **Passing large object efficiently**
+### 1.2 **Passing large object efficiently**
 
-  In C, passing large objects to functions by value leads to the creation of a copy the entire object into the function's local variables, which is very inefficient. Pointers solve this problem by passing the address of the objects, allowing the function to access it directly without copying.
+In C, passing large objects to functions by value leads to the creation of a copy the entire object into the function's local variables, which is very inefficient. Pointers solve this problem by passing the address of the objects, allowing the function to access it directly without copying.
 
-* **Dynamic memory allocation**
+### 1.3 **Dynamic memory allocation**
 
-  Dynamic memory allocation and dellocation in C allow programmers to allocate memory during runtime and release it when no longer needed. Pointers store the address of dynamically allocated memory.
+Dynamic memory allocation and dellocation in C allow programmers to allocate memory during runtime and release it when no longer needed. Pointers store the address of dynamically allocated memory.
 
-* **Implement data structure like Linked List, Tree, Binary Search, etc...**
+### 1.4 **Implement data structure like Linked List, Tree, Binary Search, etc...**
 
-  Data structures like Linked List, trees, and graphs often require nodes that are not stored continuously in memory. Pointers help link these nodes by storing the address of the next nodes thus allows the creation of dynamic and flexible data structures in C.
+Data structures like Linked List, trees, and graphs often require nodes that are not stored continuously in memory. Pointers help link these nodes by storing the address of the next nodes thus allows the creation of dynamic and flexible data structures in C.
 
-* **System level programming**
+### 1.5 **System level programming**
 
-  Pointers play a major role in multi-threading and inter-process communication. They take care of the shared memory blocks in case multiple processes access them.
+Pointers play a major role in multi-threading and inter-process communication. They take care of the shared memory blocks in case multiple processes access them.
 
-* **Returning multiple values from Functions**
+### 1.6 **Returning multiple values from Functions**
 
-  C functions typically return a single value. However multiple values can be returned by passing the addresses of the variables to the function and storing it in a pointer.
+C functions typically return a single value. However multiple values can be returned by passing the addresses of the variables to the function and storing it in a pointer.
 
-* **Accessing array element**
+### 1.7 **Accessing array element**
 
-  Internally, C uses pointer arithmetic to access elements of arrays. Understanding the relationship between arrays and pointers allows the users to direct access to array elements from anywhere if they have the address.
+Internally, C uses pointer arithmetic to access elements of arrays. Understanding the relationship between arrays and pointers allows the users to direct access to array elements from anywhere if they have the address.
 
-* **Passing arrays to Functions**
+### 1.8 **Passing arrays to Functions**
 
-  Passing larges arrays values by value in C is inefficient, as it requires copying the entirely array. Instead, arrays are passed as pointers, where only the address of the first element is passed, allowing functions to work with the original array efficiently.
+Passing larges arrays values by value in C is inefficient, as it requires copying the entirely array. Instead, arrays are passed as pointers, where only the address of the first element is passed, allowing functions to work with the original array efficiently.
 
-## Address and deference Operator in C
+## 2. Address and deference Operator in C
 
 To understand pointer in C programming language, we first need to know about two operators and that are extensively used while working with pointers.
 
@@ -45,13 +45,13 @@ They are:
 * Addressof operator `&`
 * Dereference operator `*`
 
-### Addressof operator `&`
+### 2.1 Addressof operator `&`
 
 Address of operator is denoted by `&` ampersand symbol and gives you the memory address of a given variable when place before a variable name as shown:
 
 `&variable_name`
 
-### Deference operator `*`
+### 2.2 Deference operator `*`
 
 The deference operator is denoted by `*` asterisk symbol and gives you the value stored at a given memory address stores inside a pointer. It is also placed before the pointer name as shown:
 
@@ -78,21 +78,19 @@ int main() {
 // Value of address of x: 10
 ```
 
-## Introduction of Pointer
+## 3. Introduction of Pointer
 
 In C programming, pointers are special types of variables that store memory addresses of other variables.
 
 For example, a pointer to integer stores the address of an integer, and pointer to character stores the address of a character variable
 
-### **Syntax**
-
-`data_type * pointer_name;`
+**Syntax** `data_type * pointer_name;`
 
 **Example**
 
 `short *age, *day;`
 
-### **Initialization**
+### 3.1 **Initialization**
 
 We then store the address of variable of same data type using address of operator
 
@@ -100,7 +98,7 @@ We then store the address of variable of same data type using address of operato
 
 This can also be done at declaration
 
-### Deference
+### 3.2 Deference
 
 Finally we can access the value stored in the memory address using `*` deference operator
 
@@ -131,7 +129,7 @@ Value of address of p: 0061FF18
 
 ```
 
-### Modify values using  pointer
+### 3.3 Modify values using  pointer
 
 Pointer allow us to modify the values of other variables whose address they store indirectly using deference operator
 
@@ -176,7 +174,7 @@ Value of address of x: 70
 */
 ```
 
-### Size of pointer
+### 3.4 Size of pointer
 
 All pointer variables have the same size regardless of their type whether it is integer, character, double or any other type of pointer.
 
