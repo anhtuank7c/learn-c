@@ -201,3 +201,51 @@ int main()
 */
 ```
 
+## 4. Function Parameters and Pointers in C
+
+In C, whenever any variables is passed in a function normally, a copy of that variables is generated inside the function. This is what we refer to as passing by value.  Whatever change made to the copied variables does not effect the value of the original variable.
+
+**Example**
+
+```c
+void fun(int x) {
+  x = x + 5;
+}
+
+int main() {
+  int x = 10;
+  fun(x);
+  printf("%d", x); // 10
+  return 0;
+}
+```
+
+In this example, value of **x** in `main` function remains unchanged after calling `fun(x)`, even though we modified the value of **x** inside the function. This is because the change was mode to the local copy of **x**, not the original variable.
+
+**Passing parameters as Pointers**
+
+A pointer allows you to pass the memory address of the variable and not its value. With this pointer, you can modify the original variable directly. It is called **passed by reference**. In C, the language does not support references as in C++ or Python, Java, therefore,  the only way to **pass parameters by reference** is by using pointers.
+
+**Example**
+
+```c
+void fun(int *ptr) {
+  *ptr = *ptr + 5;
+}
+
+int main() {
+  int x = 10;
+  fun(&x);
+  printf("%d", x); // 15
+  return 0;
+}
+```
+
+In this example, we pass the address of **x** to the function using the **&** operator. Inside the function, we dereference the pointer using the ***** operator to modify the original value of **x**.
+
+**Application**
+
+Passing pointers to function is helpful in the following purposes:
+
+* Using pointers allows us to **modify the original values of passed parameters** from within a function. This is useful in operations like swap, where we need to exchange values between variables in the calling function.
+* **Passing large objects**, such as structures, by value can be inefficient because the entire object is copied into the function's local variable. Pointers allows us to pass only the memory address of the object.
