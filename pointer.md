@@ -249,3 +249,72 @@ Passing pointers to function is helpful in the following purposes:
 
 * Using pointers allows us to **modify the original values of passed parameters** from within a function. This is useful in operations like swap, where we need to exchange values between variables in the calling function.
 * **Passing large objects**, such as structures, by value can be inefficient because the entire object is copied into the function's local variable. Pointers allows us to pass only the memory address of the object.
+
+## 5. Array parameters and Pointers
+
+In C, array are always passed to the function as pointers. If not handle properly, this can lead to unexpected results. Consider the below program.
+
+```c
+#include <stdio.h>
+void fun(int arr[])
+{
+  int n = sizeof(arr) / sizeof(arr[0]);
+  for (int i = 0; i < n; i++)
+  {
+    printf("%d ", arr[i]);
+  }
+}
+
+int main()
+{
+  int arr[] = {1, 2, 5, 3, 40};
+  int n = sizeof(arr) / sizeof(arr[0]);
+  for (int i = 0; i < n; i++)
+  {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+  fun(arr);
+  return 0;
+}
+// 1 2 5 3 40 
+// 1 2
+```
+
+Even though the printing code is same in both **main()** and **fun()**, why did **fun()** only printed two elements?
+
+It is because the reason that arrays are passed as pointers. The statement "**sizeof(arr)/sizeof(arr[0])**" will return **4** in **main()**
+
+i.e **(16/4)** which is what we expected. But in **fun()**, same statement returns **2 (8/4)** because here, **arr gets converted to pointer**  whose size is **8 bytes**.
+
+The correct way to pass an array to a function is by passing the size of the array explicitly:
+
+```c
+#include <stdio.h>
+void fun(int arr[], int n)
+{
+  for (int i = 0; i < n; i++)
+  {
+    printf("%d ", arr[i]);
+  }
+}
+
+int main()
+{
+  int arr[] = {1, 2, 5, 3, 40};
+  int n = sizeof(arr) / sizeof(arr[0]);
+  for (int i = 0; i < n; i++)
+  {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+  fun(arr, n);
+  return 0;
+}
+// 1 2 5 3 40 
+// 1 2 5 3 40
+```
+
+Morden compiler warn against  using sizeof on an array parameter, as it leads to incorrect results. But it is not trustable so always pass the size separately to avoid such issues.
+
+![Warning of using sizeof](./pointer_passing_array.png)
