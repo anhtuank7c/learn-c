@@ -355,3 +355,66 @@ int main() {
 
 Because the variable hold the address of the first element of an array, so when we use `*ptr` to dereference the pointer to access the value, it will be the value of the first element in array `10`, And do incrementing by 1, so it will move on 4 bytes in this case (increment by size of the data) to point to the address of the second element of array, so we have value of element 2 is `90`.
 
+### 6.2 Decrementing Pointer (--)
+
+Decrementing works similar to incrementing except that is decreases the pointer by **1 time the size of data type** it is pointing to.
+
+```c
+#include <stdio.h>
+int main() {
+    int arr[] = {10, 20, 50, 20};
+    int *ptr = arr;
+    printf("%d %p\n", *ptr, ptr);
+    ptr++;
+    printf("%d %p\n", *ptr, ptr);
+    return 0;
+}
+
+/*
+10 0061FF0C
+90 0061FF10
+10 0061FF0C
+*/
+```
+
+### 6.3 Adding/Subtracting an Integer
+
+We can also add or subtract any integer value to/from a pointer. Again, pointer will be moved forward or backward in memory by the **product of the integer and the size of the data type of pointer** not by the integer only.
+
+```c
+#include <stdio.h>
+int main() {
+    int arr[] = {10, 90, 50, 20};
+    int *ptr = arr;
+    printf("%d %p\n", *ptr, ptr);
+    ptr += 3;
+    printf("%d %p\n", *ptr, ptr);
+    ptr -= 2;
+    printf("%d %p\n", *ptr, ptr);
+    return 0;
+}
+
+/*
+10 0061FF0C
+20 0061FF18
+90 0061FF10
+*/
+```
+
+
+
+Subtracting one pointer from another gives the number of elements between them, not the raw byte difference. This difference is calculated by **dividing the byte difference by the size of the data type of pointer**
+
+```c
+#include <stdio.h>
+int main() {
+    int arr[] = {10, 90, 50, 20};
+    int *ptr1 = arr;
+    int *ptr2 = ptr1 + 3;
+    printf("%d\n", ptr2 - ptr1);
+    return 0;
+}
+// 3
+```
+
+In this program, ptr2 is 12 bytes ahead of ptr1 (3 elements * 4 bytes each). The result of `ptr2 - ptr1` is `3`, not `12`, calculated as **byte difference / sizeof(int)**.
