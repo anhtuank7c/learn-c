@@ -318,3 +318,40 @@ int main()
 Morden compiler warn against  using sizeof on an array parameter, as it leads to incorrect results. But it is not trustable so always pass the size separately to avoid such issues.
 
 ![Warning of using sizeof](./pointer_passing_array.png)
+
+## 6. Pointer Arithmetics
+
+Pointer arithmetic is the set of arithmetic operators that are allowed on pointers in C
+
+They are:
+
+* Incrementing (++) Pointer (both prefix and postfix)
+* Decrementing (--) Pointer (both prefix and postfix)
+* Adding/Subtraction an integer to/from pointer
+* Subtracting one pointer from another
+
+### 6.1 Incrementing Pointer (++)
+
+A pointer can be incremented using both prefix and postfix increment operators.
+
+After incrementing, the value of the pointer is not increased by one, but instead, it is increased by **1* size of the data type** the pointer is pointing to.
+
+```c
+#include <stdio.h>
+int main() {
+    int arr[] = {10, 20, 50, 20};
+    int *ptr = arr;
+    printf("%d %p\n", *ptr, ptr);
+    ptr++;
+    printf("%d %p\n", *ptr, ptr);
+    return 0;
+}
+
+/*
+10 0061FF0C
+90 0061FF10
+*/
+```
+
+Because the variable hold the address of the first element of an array, so when we use `*ptr` to dereference the pointer to access the value, it will be the value of the first element in array `10`, And do incrementing by 1, so it will move on 4 bytes in this case (increment by size of the data) to point to the address of the second element of array, so we have value of element 2 is `90`.
+
