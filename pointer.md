@@ -447,8 +447,44 @@ A void pointer can be declared using the **void** keyword as its data type:
 
 Unlike other pointers, void pointers cannot be directly dereferenced. They need to be type casted to the relevant data type for dereferencing. In C, any pointer can be type casted to void pointer and vice versa (C++ only support one-way pointer type casting)
 
-**Example**
+**Example two-way type conversion**
 
 ```c
+#include <stdio.h>
+
+int main() {
+    int x = 30;
+    void *p1 = &x; // int address assigned to void pinter
+    int *p2 = p1; // cast void pointer to int pointer
+
+    char y = 'G';
+    char *p3 = &y;
+
+    p1 = p3; // reassign void pointer p1 by character pointer
+    return 0;
+}
+// Program compiles without error.
 ```
 
+**Explanation:** void pointer **p1** can hold the address of **int** or **char** without problem.
+
+**Dereferencing void pointers**
+
+```c
+#include <stdio.h>
+int main() {
+    int x = 10;
+    void *ptr = &x;
+    // we need to cast void pointer into
+    // correct data type to dereference to access its value
+    printf("Value of x = %d", *(int *) ptr);
+    return 0;
+}
+```
+
+**Applications of void pointers**
+
+Void pointer is mainly used in generic programming such as given below:
+
+* Function like malloc and calloc return void* to allocate memory for any data type. It is then converted to the required type by typecasting
+* C lacks built-in generics, but void pointers enable generic programming. For example, the qsort() function uses void* to sort arrays of any type.
