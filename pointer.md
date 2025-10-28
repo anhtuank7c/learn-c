@@ -439,11 +439,7 @@ In this program, ptr2 is 12 bytes ahead of ptr1 (3 elements * 4 bytes each). The
 
 A void pointer is a pointer that has no associated data type with it. It is a generic pointer that can hold the address of any data type such as int*, char*, etc...
 
-**Syntax**
-
-A void pointer can be declared using the **void** keyword as its data type:
-
-`void * ptr_name;`
+**Syntax:** `void * ptr_name;`
 
 Unlike other pointers, void pointers cannot be directly dereferenced. They need to be type casted to the relevant data type for dereferencing. In C, any pointer can be type casted to void pointer and vice versa (C++ only support one-way pointer type casting)
 
@@ -486,5 +482,5 @@ int main() {
 
 Void pointer is mainly used in generic programming such as given below:
 
-* Function like malloc and calloc return void* to allocate memory for any data type. It is then converted to the required type by typecasting
-* C lacks built-in generics, but void pointers enable generic programming. For example, the qsort() function uses void* to sort arrays of any type.
+* Function like malloc and calloc return **void*** to allocate memory for any data type. It is then converted to the required type by typecasting
+* C lacks built-in generics, but void pointers enable generic programming. For example, the **qsort()** function uses **void*** to sort arrays of any type.
