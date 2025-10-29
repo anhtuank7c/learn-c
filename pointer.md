@@ -484,3 +484,27 @@ Void pointer is mainly used in generic programming such as given below:
 
 * Function like malloc and calloc return **void*** to allocate memory for any data type. It is then converted to the required type by typecasting
 * C lacks built-in generics, but void pointers enable generic programming. For example, the **qsort()** function uses **void*** to sort arrays of any type.
+
+## 8. NULL in C
+
+NULL is special value that can be assign to a pointer to indicate that it does not point to any valid memory location.
+
+Initialization of a pointer to NULL means that it doesn't hold a valid memory address. 
+
+Checking for NULL before dereferencing pointer ensure that you're not trying to access some invalid memory location.
+
+### 8.1 Need for NULL
+
+Consider a scenario in which a pointer variable is declared but not initialized immediately. If the code that's supposed to initialize it doesn't execute, then the pointer will hold a random address. Dereferencing such a pointer will result in unpredictable behavior just about every time during the execution of the program.
+
+```c
+#include <stdio.h>
+int main() {
+    int *ptr;
+    int age = 10;
+    char name[] = "Hello";
+    printf("Value of ptr: %d", *ptr);
+    return 0;
+}
+```
+
