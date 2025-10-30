@@ -21,7 +21,7 @@ I have many years working with React Native but [Lynx](https://lynxjs.org/) is a
 
 ## Week 1: C Fundamentals and Professional Development Practices
 
-### [Day 1: C Language Essentials and Development Environment](./0. introduction.md)
+### [Day 1: C Language Essentials and Development Environment](./0_introduction.md)
 
 - C language overview and distinguishing features
 - Setting up a professional development environment
