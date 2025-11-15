@@ -64,7 +64,13 @@ In C programming, pointers are special types of variables that store memory addr
 
 For example, a pointer to integer stores the address of an integer, and pointer to character stores the address of a character variable
 
-**Syntax** `data_type *pointer_name;`
+There are 3 ways to declare a pointer as you move the asterisk symbol.
+
+**Syntax**
+
+*  `data_type *pointer_name;`
+* `data_type* pointer_name;`
+* `data_type * pointer_name;`
 
 **Example**
 
@@ -165,20 +171,21 @@ This size depend on the system architecture. If the system is 64 bits, then poin
 
 int main()
 {
-    int *p1;
-    char *p2;
-    double *p3;
-    printf("%zu\n", sizeof(p1));
-    printf("%zu\n", sizeof(p2));
-    printf("%zu\n", sizeof(p3));
+    int age = 10;
+    int *p1 = &age;
+    printf("%u\n", sizeof(p1));
+
+    char name = "Tuan";
+    char *p2 = &name;
+    printf("%u\n", sizeof(p2));
+
+    double expense = 100.13123;
+    double *p3 = &expense;
+    printf("%u\n", sizeof(p3));
+
     return 0;
 }
 
-/*
-4
-4
-4
-*/
 ```
 
 ## 3. Application of pointer
@@ -512,7 +519,9 @@ int main() {
 
 ### 8.1 Need for NULL
 
-Consider a scenario in which a pointer variable is declared but not initialized immediately. If the code that's supposed to initialize it doesn't execute, then the pointer will hold a random address. Dereferencing such a pointer will result in unpredictable behavior just about every time during the execution of the program.
+Consider a scenario in which a pointer variable is declared but not initialized immediately. If the code that's supposed to initialize it doesn't execute, then the pointer will hold a random address. 
+
+Dereferencing such a pointer will result in unpredictable behavior just about every time **during the execution** of the program (runtime).
 
 ```c
 #include <stdio.h>
@@ -527,14 +536,44 @@ int main() {
 
 **Important Recommendation**
 
->  Never declare an uninitialized pointer, it will cause accessing random memory address which may lead to unpredictable value, or worst case would . Always assign a variable address to it or assign NULL if you aren't sure which variable to assign to.
+>  Never declare an uninitialized pointer, it will cause accessing random memory address which may lead to unpredictable value. Always assign a variable address to it or assign NULL if you aren't sure which variable to assign to.
+
+Null provides a way to explicitly mark a pointer as invalid when you don't know its valid value yet. It allows you to check if a pointer has been properly initialized before dereferencing it.
 
 ```c
 #include <stdio.h>
 int main() {
-    int *ptr; //  BAD
-    int *ptr = NULL; // GOOD
+    //  BAD
+    int *ptr1;
+    printf("Value of ptr1: %d", *ptr1);
+
+    // GOOD
+    int *ptr2 = NULL;
+    if (ptr2 != NULL)
+        printf("Value of ptr2: %d", *ptr2);
+
     return 0;
 }
 ```
 
+**Internal Implementation of NULL**
+
+According to C standard:
+
+* NULL should not point to any valid memory location
+* When the integer value 0 is used in a pointer context (where an address is expected), it should be equivalent to NULL
+
+NULL is typically implemented as a macro given below:
+
+`#define NULL (void*)0`
+
+It is typecasted to **void*** so that can be assigned to any pointer.
+
+### 8.2 Application of NULL
+
+NULL is very useful while using pointers which are prone to errors. Following are some common applications NULL is used for:
+
+* NULL is used to indicate that a pointer doesn't hold a valid memory address, whether it's uninitialized or intentionally reset.
+* When a function needs to indicate failure or the absence of a result, it can return NULL. For example `malloc` function return NULL if the requested dynamic memory cannot be allocated.
+* In data structure like **Linked List** and **Trees**, NULL is used to mark the end of the structure or the absence of a next element.
+* NULL evaluates to **false** in a Boolean expression.
