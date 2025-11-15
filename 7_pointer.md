@@ -188,6 +188,63 @@ int main()
 
 ```
 
+**Important**
+
+* The size of pointer doesn't depend on the size of the variable it points to
+* The size of pointer depends only on the system architecture (32-bit, 63-bit etc...)
+
+On 64-bit system: `int` take 4 bytes, `char` take 1 byte, `double` take 8 bytes. Any pointer that points to `int, char, double` take 8 bytes because the architecture uses 64-bit memory addresses.
+
+On 32-bit system: All pointer take 4 bytes since the architecture uses 32-bit memory addresses.
+
+**Extra knowledge about 32-bit/64-bit system**
+
+* 32-bit architecture:
+
+  Uses **32 bits = 4 bytes** to store a memory address
+
+  Maximum addressable memory = 2^32 bytes = **4GB**
+
+* 64-bit architecture
+
+  Uses **64 bits = 8 bytes** to store a memory address
+
+  Maximum addressable memory = 2^64 (theoretically ~18 exabytes but OSes limit it)
+
+Sometime you have a 64-bit PC but still got 4 bytes when checking the size of a pointer, it is normal because you may not force the compiler to compile 64-bit program or just simple pick the wrong compiler (32-bit instead of 64 bit).
+
+In my cases I've use the MinGW 32-bit instead of MinGW-64 bit.
+
+You can verify again by execute below code
+
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Pointer size: %zu\n", sizeof(void*));
+
+#if defined(__x86_64__) || defined(_M_X64)
+    printf("Compiled as 64-bit binary\n");
+#elif defined(__i386__) || defined(_M_IX86)
+    printf("Compiled as 32-bit binary\n");
+#endif
+}
+```
+
+Or execute this command `gcc -v`
+
+```tex
+Using built-in specs.
+COLLECT_GCC=C:\MinGW\bin\gcc.exe
+COLLECT_LTO_WRAPPER=c:/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe
+Target: mingw32
+Configured with: ../src/gcc-6.3.0/configure --build=x86_64-pc-linux-gnu --host=mingw32 --target=mingw32 --with-gmp=/mingw --with-mpfr --with-mpc=/mingw --with-isl=/mingw --prefix=/mingw --disable-win32-registry --with-arch=i586 --with-tune=generic --enable-languages=c,c++,objc,obj-c++,fortran,ada --with-pkgversion='MinGW.org GCC-6.3.0-1' --enable-static --enable-shared --enable-threads --with-dwarf2 --disable-sjlj-exceptions --enable-version-specific-runtime-libs --with-libiconv-prefix=/mingw --with-libintl-prefix=/mingw --enable-libstdcxx-debug --enable-libgomp --disable-libvtv --enable-nls
+Thread model: win32
+gcc version 6.3.0 (MinGW.org GCC-6.3.0-1)
+```
+
+It's clearly points out that I am using MinGW 32-bit
+
 ## 3. Application of pointer
 
 ### 3.1 **Changing passed parameter**
