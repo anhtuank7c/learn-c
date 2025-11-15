@@ -245,6 +245,8 @@ gcc version 6.3.0 (MinGW.org GCC-6.3.0-1)
 
 It's clearly points out that I am using MinGW 32-bit
 
+Reference documents regarding 32 and 64 bit operating system: https://www.geeksforgeeks.org/operating-systems/32-bit-vs-64-bit-operating-systems/
+
 ## 3. Application of pointer
 
 ### 3.1 **Changing passed parameter**
