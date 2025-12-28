@@ -1,6 +1,6 @@
 # 100 Days of Code - A Complete Guide For Beginners and Experienced (remake for C programming language)
 
-> Learn code without actual coding is such, you can't just acquire all knowledge by just watching a movie.
+> Learning to code without actual coding is like trying to acquire knowledge by just watching a movie.
 
 This challenges originally based on [Geeks For Geeks - 100 Days of Code](https://www.geeksforgeeks.org/blogs/100-days-of-code-a-complete-guide-for-beginners-and-experienced/) which design for everyone to enhance developing experience.
 
@@ -135,7 +135,7 @@ System design - Learn low-level system design concepts: file I/O, process commun
 - [ ] Day 84
 - [ ] Day 85
 
-### Journey 07 - Days 86-92 (6 days)
+### Journey 07 - Days 86-92 (7 days)
 
 OS and DBMS - Study OS internals: processes, threads, synchronization primitives (mutex, semaphore), memory management, and scheduling. Learn database fundamentals and how to interact with databases from C.
 
@@ -147,7 +147,7 @@ OS and DBMS - Study OS internals: processes, threads, synchronization primitives
 - [ ] Day 91
 - [ ] Day 92
 
-### Journey 08 - Days 93-99 (6 days)
+### Journey 08 - Days 93-99 (7 days)
 
 Software Design in C (OOP Patterns without OOP) - Apply design patterns and SOLID principles using C idioms: opaque pointers for encapsulation, function pointers for polymorphism, and struct composition for code reuse. Design maintainable, modular C programs.
 
