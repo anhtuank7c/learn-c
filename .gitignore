@@ -1,3 +1,7 @@
 # Ignore compiled binaries in exercises folder
 exercises/*
 !exercises/*.c
+
+# ide
+.idea
+.vscode
