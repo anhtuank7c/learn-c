@@ -15,4 +15,3 @@ bool odd(int a);
 int modulus(int a, int b);
 
 #endif //CALCULATOR_H
-//gcc -Wall -Wextra -o calculator main.c calulator.c 2>&1)
