@@ -24,8 +24,8 @@ I will not repeat the content of 100 Days of Code, I just link all the exercises
 
 Programming language fundamental - Variables, data types, control flow, functions, pointers, memory management.
 
-- [x] [Day 01](./day_01/README.md)
-- [ ] Day 02
+- [x] [Day 01](day_xx/README.md)
+- [x] [Day 02](./day_02/README.md)
 - [ ] Day 03
 - [ ] Day 04
 - [ ] Day 05
