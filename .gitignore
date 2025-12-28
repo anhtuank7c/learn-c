@@ -1,6 +1,10 @@
 # Ignore compiled binaries in exercises folder
 exercises/*
+# Unignore c files
 !exercises/*.c
+
+# Unignore header files
+!exercises/*.h
 
 # ide
 .idea
