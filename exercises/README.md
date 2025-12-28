@@ -163,4 +163,6 @@ Software Design in C (OOP Patterns without OOP) - Apply design patterns and SOLI
 
 Cultural Fit & Interview Preparation - Prepare for behavioral interviews, practice explaining your code and design decisions clearly, and demonstrate passion for systems programming and problem-solving.
 
+> Companies do not hire toxic people and also they don't hire candidates who are not passionate about the product.
+
 - [ ] Day 100
