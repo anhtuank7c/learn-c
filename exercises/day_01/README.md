@@ -1,32 +1,46 @@
-# Day 01
+# Day 01 - Setup & First Program
 
-Make a simple calculator application that receive 2 numbers from keyboard, then able to:
+## Topics
 
-- Addition of two numbers
-- Subtraction of two numbers
-- Multiplication of two numbers
-- Division of two numbers
-- Modulus operation on two numbers
-- Check if number is odd
-- Check if number is even
+- Environment setup (gcc, ide/editor)
+- Compilation process (gcc, clang)
+- `printf` for output
+- `scanf` for input
+- Basic program structure
 
-## Project structure
+## Theory
 
-```text
-day_01/
-    main.c          Entry point, invoke arithmetic operators from calculator.c, print out the result
-    calculator.h    Header file containing function declaration for arithmetic operators
-    calculator.c    Source file containing function definition for arithmetic operators
+```c
+#include <stdio.h> // header for input/output
+
+int main() // entry point
+{
+    // your code here
+    return 0; // Exit status
+}
 ```
 
-## Build & execution
+Compilation:
 
-```bash
-cd day_01/
+```c
+// compile
+gcc -o program_name entry_file.c another_related_file.c and_another_file.c
 
-# Compile source code to single execution file
-gcc -Wall -Wextra -o calculator main.c calculator.c
-
-# execute program
-./calculator
+// execute program
+./program_name
 ```
+
+## Exercises
+
+- [x] Exercise 01: Install a C compiler (gcc) and write a program that prints "Hello, World!" to the console
+- [x] Exercise 02: Print your name, age, and favorite programming language on separate lines.
+- [x] Exercise 03: Read two integers from user input and print their sum.
+- [x] Exercise 04: Print the following pattern using `printf`
+    ```
+    *
+    **
+    ***
+    ****
+    *****
+    ```
+- [x] Exercise 05: Read the user's name and print a personalized greeting message.
