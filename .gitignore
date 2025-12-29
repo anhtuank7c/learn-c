@@ -10,6 +10,9 @@ exercises/*/*
 # Unignore markdown files
 !exercises/*/*.md
 
+# Unignore text files
+!exercises/*/*.txt
+
 # ide
 .idea
 .vscode
