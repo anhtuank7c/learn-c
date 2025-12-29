@@ -35,7 +35,7 @@ int main()
 
 ## Exercises
 
-- [ ] Exercise 01: Build a simple calculator that perform addition, subtraction, multiplication, division, and modulus. Read 2 numbers and operator from user.
+- [x] [Exercise 01: Build a simple calculator that perform addition, subtraction, multiplication, division, and modulus. Read 2 numbers and operator from user.](./ex_01/README.md)
 - [ ] Exercise 02:
 - [ ] Exercise 03:
 - [ ] Exercise 04:
